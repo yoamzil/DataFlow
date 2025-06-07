@@ -6,7 +6,6 @@ const Dashboard = () => {
   return (
 	  <div>
 		  <div className='bg-red-500 p-4'>Navbar</div>
-		  <div>dashboard</div>
 	  </div>
   )
 }
