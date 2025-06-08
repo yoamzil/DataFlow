@@ -9,11 +9,12 @@ import { useLanguage } from '../../context/LanguageContext';
 import AddClientModal from '../../components/AddClientModal';
 
 interface Client {
-	id: number;
+	idCard: string;
 	name: string;
 	phone: string;
 	date: Date;
 	amount: number;
+	duration: number;
 	fileId: string;
 	company: string;
 }
@@ -26,29 +27,32 @@ interface SortConfig {
 // Mock data for UI testing
 const mockClients: Client[] = [
 	{
-		id: 1,
+		idCard: "123456789",
 		name: "John Doe",
 		phone: "1234567890",
 		date: new Date(),
 		amount: 100.50,
+		duration: 12,
 		fileId: "FILE123",
 		company: "Acme Inc"
 	},
 	{
-		id: 2,
+		idCard: "987654321",
 		name: "Jane Smith",
 		phone: "0987654321",
 		date: new Date(),
 		amount: 250.75,
+		duration: 24,
 		fileId: "FILE456",
 		company: "Tech Corp"
 	},
 	{
-		id: 3,
+		idCard: "456789123",
 		name: "Bob Johnson",
 		phone: "5555555555",
 		date: new Date(),
 		amount: 75.25,
+		duration: 6,
 		fileId: "FILE789",
 		company: "Global Ltd"
 	}
@@ -79,7 +83,7 @@ export default function ClientsPage() {
 			const query = searchQuery.toLowerCase();
 			results = results.filter(client =>
 				client.name.toLowerCase().includes(query) ||
-				client.id.toString().includes(query) ||
+				client.idCard.toLowerCase().includes(query) ||
 				client.phone.includes(query) ||
 				client.fileId.toString().includes(query)
 			);
@@ -112,11 +116,11 @@ export default function ClientsPage() {
 		setSortConfig({ key, direction });
 	};
 
-	const handleDelete = async (id: number) => {
+	const handleDelete = async (id: string) => {
 		if (window.confirm(t('clients.confirmDelete'))) {
 			try {
 				// For now, just remove from state
-				setClients(clients.filter(client => client.id !== id));
+				setClients(clients.filter(client => client.idCard !== id));
 			} catch (error) {
 				console.error('Error deleting client:', error);
 			}
@@ -210,11 +214,11 @@ export default function ClientsPage() {
 								<th
 									scope="col"
 									className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-									onClick={() => handleSort('id')}
+									onClick={() => handleSort('idCard')}
 								>
 									<div className="flex items-center">
 										{t('clients.id')}
-										<SortIcon column="id" />
+										<SortIcon column="idCard" />
 									</div>
 								</th>
 								<th
@@ -268,12 +272,12 @@ export default function ClientsPage() {
 						<tbody className="bg-white divide-y divide-gray-200">
 							{paginatedClients.length > 0 ? (
 								paginatedClients.map((client) => (
-									<tr key={client.id} className="hover:bg-gray-50">
+									<tr key={client.idCard} className="hover:bg-gray-50">
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm font-medium text-gray-900">{client.name}</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
-											<div className="text-sm text-gray-500">{client.id}</div>
+											<div className="text-sm text-gray-500">{client.idCard}</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-500">{client.phone}</div>
@@ -284,7 +288,7 @@ export default function ClientsPage() {
 											</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
-											<div className="text-sm text-gray-900">${client.amount.toFixed(2)}</div>
+											<div className="text-sm text-gray-900">${client.amount.toFixed(2)}/{client.duration}</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="flex items-center text-sm text-gray-500">
@@ -305,7 +309,7 @@ export default function ClientsPage() {
 												<Edit className="h-4 w-4" />
 											</button>
 											<button
-												onClick={() => handleDelete(client.id)}
+												onClick={() => handleDelete(client.idCard)}
 												className="text-red-600 hover:text-red-900"
 											>
 												<Trash2 className="h-4 w-4" />

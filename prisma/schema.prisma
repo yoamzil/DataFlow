@@ -9,13 +9,14 @@ datasource db {
 }
 
 model Client {
-  id        Int      @id @default(autoincrement())
-  name      String
-  phone     String
-  date      DateTime
-  amount    Float
-  fileId    String
-  company   String
+  idCard   String   @id
+  name     String
+  phone    String
+  date     DateTime
+  amount   Float
+  duration Int
+  fileId   String
+  company  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
