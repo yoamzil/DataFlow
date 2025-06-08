@@ -53,7 +53,7 @@ const Navbar = () => {
               }`}
             >
               <Calculator className="h-4 w-4 mr-2" />
-              Money
+              Money Calculation
             </Link>
 
             <button

@@ -1,13 +1,95 @@
-import React from 'react'
+// src/app/page.tsx
 import { ArrowRight, Database, Users, Calculator, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
-const Dashboard = () => {
-  return (
-	  <div>
-		  <div className='bg-red-500 p-4'>Navbar</div>
-	  </div>
-  )
-}
+export default function Home() {
+	return (
+		<div className="max-w-6xl mx-auto">
+			<div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 shadow-2xl">
+				<div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
+				<div className="relative px-8 py-16 sm:px-16 sm:py-24">
+					<div className="max-w-3xl">
+						<h1 className="text-4xl font-bold text-white mb-4 sm:text-5xl">
+							Welcome to your client management solution
+						</h1>
+						<p className="text-xl text-blue-100 mb-8">
+							Effortlessly manage your client information with DataFlow. Add, view, and search through essential data to streamline your workflow.
+						</p>
+						<Link
+							href="/clients"
+							className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white shadow-lg transition-all duration-150"
+						>
+							Get Started
+							<ArrowRight className="ml-2 h-5 w-5" />
+						</Link>
+					</div>
+				</div>
+				<div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-1/2 aspect-square bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full opacity-50 blur-3xl"></div>
+			</div>
 
-export default Dashboard
+			<div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+				<div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-200 group">
+					<div className="h-12 w-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+						<Users className="h-6 w-6 text-blue-600" />
+					</div>
+					<h3 className="text-lg font-semibold text-gray-900 mb-2">Client Management</h3>
+					<p className="text-gray-600 mb-4">Efficiently organize and track your client information in one centralized location.</p>
+					<Link href="/clients" className="inline-flex items-center text-blue-600 hover:text-blue-700">
+						View Clients
+						<ChevronRight className="ml-1 h-4 w-4" />
+					</Link>
+				</div>
+
+				<div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-200 group">
+					<div className="h-12 w-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+						<Calculator className="h-6 w-6 text-green-600" />
+					</div>
+					<h3 className="text-lg font-semibold text-gray-900 mb-2">Money Calculation</h3>
+					<p className="text-gray-600 mb-4">Quickly calculate and manage financial transactions with our intuitive calculator.</p>
+					<Link href="/money-calculation" className="inline-flex items-center text-green-600 hover:text-green-700">
+						Calculate Now
+						<ChevronRight className="ml-1 h-4 w-4" />
+					</Link>
+				</div>
+
+				<div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-200 group">
+					<div className="h-12 w-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+						<Database className="h-6 w-6 text-purple-600" />
+					</div>
+					<h3 className="text-lg font-semibold text-gray-900 mb-2">Database Status</h3>
+					<p className="text-gray-600 mb-4">Your local SQLite database is active and ready for managing client data.</p>
+					<div className="flex items-center text-purple-600">
+						<div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+						<span className="font-medium">Connected</span>
+					</div>
+				</div>
+			</div>
+			<div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+				<div className="p-6">
+					<h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Tips</h2>
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div className="flex items-start space-x-4">
+							<div className="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-lg flex items-center justify-center">
+								<Users className="h-4 w-4 text-blue-600" />
+							</div>
+							<div>
+								<h3 className="font-medium text-gray-900">Organize Clients</h3>
+								<p className="mt-1 text-sm text-gray-500">Group clients by company and use tags for better organization.</p>
+							</div>
+						</div>
+
+						<div className="flex items-start space-x-4">
+							<div className="flex-shrink-0 h-8 w-8 bg-green-100 rounded-lg flex items-center justify-center">
+								<Calculator className="h-4 w-4 text-green-600" />
+							</div>
+							<div>
+								<h3 className="font-medium text-gray-900">Track Finances</h3>
+								<p className="mt-1 text-sm text-gray-500">Use the money calculator to quickly tally up transactions.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+}
