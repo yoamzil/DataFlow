@@ -34,7 +34,9 @@ const Navbar = () => {
 								}`}
 						>
 							<Database className="h-4 w-4 mr-2" />
-							{t('nav.dashboard')}
+							<div className='not-lg:hidden'>
+								{t('nav.dashboard')}
+							</div>
 						</Link>
 
 						<Link
@@ -45,7 +47,9 @@ const Navbar = () => {
 								}`}
 						>
 							<Users className="h-4 w-4 mr-2" />
-							{t('nav.clients')}
+							<div className='not-lg:hidden'>
+								{t('nav.clients')}
+							</div>
 						</Link>
 
 						<Link
@@ -56,7 +60,9 @@ const Navbar = () => {
 								}`}
 						>
 							<Calculator className="h-4 w-4 mr-2" />
-							{t('nav.money')}
+							<div className='not-lg:hidden'>
+								{t('nav.money')}
+							</div>
 						</Link>
 
 						<button
