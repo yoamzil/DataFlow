@@ -65,8 +65,8 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
 			<div className="bg-white rounded-lg p-6 w-full max-w-md">
 				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-xl font-semibold">
-						{client ? t('clients.edit') : t('clients.add')}
+					<h2 className="text-xl font-semibold text-gray-700">
+						{client ? t('form.title.edit') : t('form.title.add')}
 					</h2>
 					<button onClick={onClose} className="text-gray-500 hover:text-gray-700">
 						<X className="h-6 w-6" />
@@ -76,7 +76,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<div>
 						<label htmlFor="idCard" className="block text-sm font-medium text-gray-700">
-							{t('clients.idCard')}
+							{t('form.labels.id')}
 						</label>
 						<input
 							type="text"
@@ -90,7 +90,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="name" className="block text-sm font-medium text-gray-700">
-							{t('clients.name')}
+							{t('form.labels.name')}
 						</label>
 						<input
 							type="text"
@@ -104,7 +104,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-							{t('clients.phone')}
+							{t('form.labels.phone')}
 						</label>
 						<input
 							type="tel"
@@ -118,7 +118,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="date" className="block text-sm font-medium text-gray-700">
-							{t('clients.date')}
+							{t('form.labels.date')}
 						</label>
 						<input
 							type="date"
@@ -132,7 +132,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="amount" className="block text-sm font-medium text-gray-700">
-							{t('clients.amount')}
+							{t('form.labels.amount')}
 						</label>
 						<input
 							type="number"
@@ -148,7 +148,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="duration" className="block text-sm font-medium text-gray-700">
-							{t('clients.duration')}
+							{t('form.labels.duration')}
 						</label>
 						<input
 							type="number"
@@ -163,7 +163,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="fileId" className="block text-sm font-medium text-gray-700">
-							{t('clients.fileId')}
+							{t('form.labels.fileId')}
 						</label>
 						<input
 							type="text"
@@ -177,7 +177,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 					<div>
 						<label htmlFor="company" className="block text-sm font-medium text-gray-700">
-							{t('clients.company')}
+							{t('form.labels.company')}
 						</label>
 						<select
 							id="company"
@@ -186,7 +186,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							onChange={(e) => setFormData({ ...formData, company: e.target.value })}
 							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 						>
-							<option value="">{t('clients.selectCompany')}</option>
+							<option value="">{t('form.placeholders.selectCompany')}</option>
 							{companies.map((company) => (
 								<option key={company} value={company}>
 									{company}
@@ -201,13 +201,13 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							onClick={onClose}
 							className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
 						>
-							{t('form.cancel')}
+							{t('form.buttons.cancel')}
 						</button>
 						<button
 							type="submit"
 							className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
 						>
-							{client ? t('form.save') : t('form.add')}
+							{client ? t('form.buttons.update') : t('form.buttons.add')}
 						</button>
 					</div>
 				</form>
