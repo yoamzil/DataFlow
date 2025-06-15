@@ -292,7 +292,7 @@ export default function ClientsPage() {
 											</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
-											<div className="text-sm text-gray-900">${client.amount.toFixed(2)}/{client.duration}</div>
+											<div className="text-sm text-gray-900">{client.amount.toFixed(2)} DH/ {client.duration}</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="flex items-center text-sm text-gray-500">
