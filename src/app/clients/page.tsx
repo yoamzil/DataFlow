@@ -34,7 +34,7 @@ const mockClients: Client[] = [
 		amount: 100.50,
 		duration: 12,
 		fileId: "FILE123",
-		company: "Acme Inc"
+		company: "Sorec Credit"
 	},
 	{
 		idCard: "987654321",
@@ -44,7 +44,7 @@ const mockClients: Client[] = [
 		amount: 250.75,
 		duration: 24,
 		fileId: "FILE456",
-		company: "Tech Corp"
+		company: "Wafasalaf"
 	},
 	{
 		idCard: "456789123",
@@ -54,11 +54,11 @@ const mockClients: Client[] = [
 		amount: 75.25,
 		duration: 6,
 		fileId: "FILE789",
-		company: "Global Ltd"
+		company: "Salafin"
 	}
 ];
 
-const companies = ['Acme Inc', 'Tech Corp', 'Global Ltd'];
+const companies = ['Sorec Credit', 'Wafasalaf', 'Salafin', 'Vivalis'];
 const ITEMS_PER_PAGE = 10;
 
 export default function ClientsPage() {
@@ -284,7 +284,11 @@ export default function ClientsPage() {
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-500">
-												{new Date(client.date).toLocaleDateString()}
+												{new Date(client.date).toLocaleDateString('en-GB', {
+													day: '2-digit',
+													month: '2-digit',
+													year: '2-digit'
+												})}
 											</div>
 										</td>
 										<td className="px-6 py-4 whitespace-nowrap">

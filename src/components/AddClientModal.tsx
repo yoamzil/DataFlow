@@ -143,7 +143,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							step="0.01"
 							value={formData.amount}
 							onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
-							className="block w-full px-3 py-2.5 text-base rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
