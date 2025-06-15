@@ -64,32 +64,19 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	return (
 		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
 			<div className="bg-white rounded-lg p-6 w-full max-w-md">
-				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-xl font-semibold text-gray-700">
+				<div className="flex justify-between items-center mb-6">
+					<h2 className="text-xl font-bold text-gray-800">
 						{client ? t('form.title.edit') : t('form.title.add')}
 					</h2>
-					<button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+					<button onClick={onClose} className="text-gray-500 hover:text-gray-700 -mr-2">
 						<X className="h-6 w-6" />
 					</button>
 				</div>
 
 				<form onSubmit={handleSubmit} className="space-y-4">
-					<div>
-						<label htmlFor="idCard" className="block font-medium text-gray-700">
-							{t('form.labels.id')}
-						</label>
-						<input
-							type="text"
-							id="idCard"
-							required
-							value={formData.idCard}
-							onChange={(e) => setFormData({ ...formData, idCard: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-					</div>
 
 					<div>
-						<label htmlFor="name" className="block font-medium text-gray-700">
+						<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.name')}
 						</label>
 						<input
@@ -98,12 +85,26 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.name}
 							onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="phone" className="block font-medium text-gray-700">
+						<label htmlFor="idCard" className="block text-sm font-medium text-gray-700 mb-1">
+							{t('form.labels.id')}
+						</label>
+						<input
+							type="text"
+							id="idCard"
+							required
+							value={formData.idCard}
+							onChange={(e) => setFormData({ ...formData, idCard: e.target.value })}
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+						/>
+					</div>
+
+					<div>
+						<label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.phone')}
 						</label>
 						<input
@@ -112,12 +113,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.phone}
 							onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="date" className="block font-medium text-gray-700">
+						<label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.date')}
 						</label>
 						<input
@@ -126,12 +127,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.date}
 							onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="amount" className="block font-medium text-gray-700">
+						<label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.amount')}
 						</label>
 						<input
@@ -142,12 +143,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							step="0.01"
 							value={formData.amount}
 							onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="duration" className="block font-medium text-gray-700">
+						<label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.duration')}
 						</label>
 						<input
@@ -157,12 +158,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							min="1"
 							value={formData.duration}
 							onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="fileId" className="block font-medium text-gray-700">
+						<label htmlFor="fileId" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.fileId')}
 						</label>
 						<input
@@ -171,12 +172,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.fileId}
 							onChange={(e) => setFormData({ ...formData, fileId: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="company" className="block font-medium text-gray-700">
+						<label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
 							{t('form.labels.company')}
 						</label>
 						<select
@@ -184,7 +185,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.company}
 							onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						>
 							<option value="">{t('form.placeholders.selectCompany')}</option>
 							{companies.map((company) => (
@@ -195,17 +196,17 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						</select>
 					</div>
 
-					<div className="flex justify-end space-x-3 mt-6">
+					<div className="flex justify-end space-x-4 mt-8">
 						<button
 							type="button"
 							onClick={onClose}
-							className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+							className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-150"
 						>
 							{t('form.buttons.cancel')}
 						</button>
 						<button
 							type="submit"
-							className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+							className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150"
 						>
 							{client ? t('form.buttons.update') : t('form.buttons.add')}
 						</button>
