@@ -75,7 +75,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<div>
-						<label htmlFor="idCard" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="idCard" className="block font-medium text-gray-700">
 							{t('form.labels.id')}
 						</label>
 						<input
@@ -84,12 +84,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.idCard}
 							onChange={(e) => setFormData({ ...formData, idCard: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="name" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="name" className="block font-medium text-gray-700">
 							{t('form.labels.name')}
 						</label>
 						<input
@@ -98,12 +98,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.name}
 							onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="phone" className="block font-medium text-gray-700">
 							{t('form.labels.phone')}
 						</label>
 						<input
@@ -112,12 +112,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.phone}
 							onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="date" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="date" className="block font-medium text-gray-700">
 							{t('form.labels.date')}
 						</label>
 						<input
@@ -126,12 +126,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.date}
 							onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="amount" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="amount" className="block font-medium text-gray-700">
 							{t('form.labels.amount')}
 						</label>
 						<input
@@ -142,12 +142,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							step="0.01"
 							value={formData.amount}
 							onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="duration" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="duration" className="block font-medium text-gray-700">
 							{t('form.labels.duration')}
 						</label>
 						<input
@@ -157,12 +157,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							min="1"
 							value={formData.duration}
 							onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="fileId" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="fileId" className="block font-medium text-gray-700">
 							{t('form.labels.fileId')}
 						</label>
 						<input
@@ -171,12 +171,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.fileId}
 							onChange={(e) => setFormData({ ...formData, fileId: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 					</div>
 
 					<div>
-						<label htmlFor="company" className="block text-sm font-medium text-gray-700">
+						<label htmlFor="company" className="block font-medium text-gray-700">
 							{t('form.labels.company')}
 						</label>
 						<select
@@ -184,7 +184,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							required
 							value={formData.company}
 							onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						>
 							<option value="">{t('form.placeholders.selectCompany')}</option>
 							{companies.map((company) => (
