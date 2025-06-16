@@ -62,7 +62,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	};
 
 	return (
-		<div className="fixed inset-0 bg-white/5 backdrop-blur-3xl flex items-center justify-center p-4 ">
+		<div className="fixed inset-0 bg-white/5 backdrop-blur-sm flex items-center justify-center p-4 ">
 			<div className="bg-white rounded-lg p-6 w-full max-w-md border border-gray-700">
 				<div className="flex justify-between items-center mb-6">
 					<h2 className="text-xl font-bold text-gray-800">

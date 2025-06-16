@@ -34,7 +34,7 @@ const mockClients: Client[] = [
 		amount: 100.50,
 		duration: 12,
 		fileId: "FILE123",
-		company: "Sorec Credit"
+		company: "Sorec"
 	},
 	{
 		idCard: "987654321",
@@ -58,7 +58,7 @@ const mockClients: Client[] = [
 	}
 ];
 
-const companies = ['Sorec Credit', 'Wafasalaf', 'Salafin', 'Vivalis'];
+const companies = ['Sorec', 'Wafasalaf', 'Salafin', 'Vivalis', 'Sofac'];
 const ITEMS_PER_PAGE = 10;
 
 export default function ClientsPage() {
