@@ -72,7 +72,7 @@ const translations = {
 		'form.success.added': 'Client added successfully',
 		'form.success.updated': 'Client updated successfully',
 		'footer.madeWith': 'Made with',
-		'footer.allRights': 'All rights reserved',
+		'footer.allRights': 'All rights reserved.',
 		'footer.byTeam': 'by Youness Amzil',
 	},
 	fr: {
@@ -136,7 +136,7 @@ const translations = {
 		'form.success.added': 'Client ajouté avec succès',
 		'form.success.updated': 'Client mis à jour avec succès',
 		'footer.madeWith': 'Fait avec',
-		'footer.allRights': 'Tous droits réservés',
+		'footer.allRights': 'Tous droits réservés.',
 		'footer.byTeam': 'par Youness Amzil',
 	},
 };
