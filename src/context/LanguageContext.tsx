@@ -70,7 +70,10 @@ const translations = {
 		'form.errors.companyRequired': 'Company is required',
 		'form.errors.saveFailed': 'Failed to save client',
 		'form.success.added': 'Client added successfully',
-		'form.success.updated': 'Client updated successfully'
+		'form.success.updated': 'Client updated successfully',
+		'footer.madeWith': 'Made with',
+		'footer.allRights': 'All rights reserved',
+		'footer.byTeam': 'by Youness Amzil',
 	},
 	fr: {
 		'nav.dashboard': 'Tableau de bord',
@@ -131,7 +134,10 @@ const translations = {
 		'form.errors.companyRequired': 'L\'entreprise est requise',
 		'form.errors.saveFailed': 'Échec de l\'enregistrement du client',
 		'form.success.added': 'Client ajouté avec succès',
-		'form.success.updated': 'Client mis à jour avec succès'
+		'form.success.updated': 'Client mis à jour avec succès',
+		'footer.madeWith': 'Fait avec',
+		'footer.allRights': 'Tous droits réservés',
+		'footer.byTeam': 'par Youness Amzil',
 	},
 };
 

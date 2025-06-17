@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import { LanguageProvider } from '../context/LanguageContext'
 import '../styles/globals.css'
+import Footer from '@/components/Footer'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -29,6 +30,7 @@ export default function RootLayout({
 						<main className="flex-1 container mx-auto px-4 py-6">
 							{children}
 						</main>
+						<Footer />
 					</div>
 				</LanguageProvider>
 			</body>
