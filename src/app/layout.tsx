@@ -27,7 +27,7 @@ export default function RootLayout({
 					<div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col">
 						<Toaster position="top-right" />
 						<Navbar />
-						<main className="flex-1 container mx-auto px-4 py-6">
+						<main className="flex-1 container mx-auto px-4 py-8">
 							{children}
 						</main>
 						<Footer />
