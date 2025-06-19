@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useForm } from 'react-hook-form';
 
 interface Client {
 	idCard: string;
@@ -20,27 +21,32 @@ interface AddClientModalProps {
 	companies: string[];
 }
 
+type ClientFormData = Omit<Client, 'date'> & { date: string };
+
 export default function AddClientModal({ isOpen, onClose, client, companies }: AddClientModalProps) {
 	const { t } = useLanguage();
-	const [formData, setFormData] = useState<Omit<Client, 'date'> & { date: string }>({
-		idCard: '',
-		name: '',
-		phone: '',
-		date: new Date().toISOString().split('T')[0],
-		amount: 0,
-		duration: 0,
-		fileId: '',
-		company: ''
+
+	const { register, handleSubmit, reset, formState: { errors } } = useForm<ClientFormData>({
+		defaultValues: {
+			idCard: '',
+			name: '',
+			phone: '',
+			date: new Date().toISOString().split('T')[0],
+			amount: 0,
+			duration: 0,
+			fileId: '',
+			company: ''
+		}
 	});
 
 	useEffect(() => {
 		if (client) {
-			setFormData({
+			reset({
 				...client,
 				date: new Date(client.date).toISOString().split('T')[0]
 			});
 		} else {
-			setFormData({
+			reset({
 				idCard: '',
 				name: '',
 				phone: '',
@@ -51,13 +57,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 				company: ''
 			});
 		}
-	}, [client]);
+	}, [client, reset]);
 
 	if (!isOpen) return null;
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// TODO: Implement form submission
+	const onSubmit = (data: ClientFormData) => {
+		// TODO: Implement form submission logic
 		onClose();
 	};
 
@@ -73,7 +78,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 					</button>
 				</div>
 
-				<form onSubmit={handleSubmit} className="space-y-4">
+				<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
 					<div>
 						<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -82,11 +87,10 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="text"
 							id="name"
-							required
-							value={formData.name}
-							onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+							{...register('name', { required: t('form.errors.nameRequired') })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
 					</div>
 
 					<div>
@@ -96,11 +100,10 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="text"
 							id="idCard"
-							required
-							value={formData.idCard}
-							onChange={(e) => setFormData({ ...formData, idCard: e.target.value })}
+							{...register('idCard', { required: t('form.errors.idRequired') })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.idCard && <span className="text-red-500 text-xs">{errors.idCard.message as string}</span>}
 					</div>
 
 					<div>
@@ -110,11 +113,10 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="tel"
 							id="phone"
-							required
-							value={formData.phone}
-							onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+							{...register('phone', { required: t('form.errors.phoneRequired') })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.phone && <span className="text-red-500 text-xs">{errors.phone.message as string}</span>}
 					</div>
 
 					<div>
@@ -124,11 +126,10 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="date"
 							id="date"
-							required
-							value={formData.date}
-							onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+							{...register('date', { required: t('form.errors.dateRequired') })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.date && <span className="text-red-500 text-xs">{errors.date.message as string}</span>}
 					</div>
 
 					<div>
@@ -138,13 +139,12 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="number"
 							id="amount"
-							required
-							min="0"
 							step="0.01"
-							value={formData.amount}
-							onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
+							min="0"
+							{...register('amount', { required: t('form.errors.amountInvalid'), min: { value: 0.01, message: t('form.errors.amountInvalid') } })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.amount && <span className="text-red-500 text-xs">{errors.amount.message as string}</span>}
 					</div>
 
 					<div>
@@ -154,12 +154,11 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="number"
 							id="duration"
-							required
 							min="1"
-							value={formData.duration}
-							onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
+							{...register('duration', { required: 'Duration is required', min: { value: 1, message: t('form.errors.amountInvalid') } })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.duration && <span className="text-red-500 text-xs">{errors.duration.message as string}</span>}
 					</div>
 
 					<div>
@@ -169,11 +168,10 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="text"
 							id="fileId"
-							required
-							value={formData.fileId}
-							onChange={(e) => setFormData({ ...formData, fileId: e.target.value })}
+							{...register('fileId', { required: t('form.errors.fileIdRequired') })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
+						{errors.fileId && <span className="text-red-500 text-xs">{errors.fileId.message as string}</span>}
 					</div>
 
 					<div>
@@ -182,9 +180,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						</label>
 						<select
 							id="company"
-							required
-							value={formData.company}
-							onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+							{...register('company', { required: t('form.errors.companyRequired') })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						>
 							<option value="">{t('form.placeholders.selectCompany')}</option>
@@ -194,6 +190,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 								</option>
 							))}
 						</select>
+						{errors.company && <span className="text-red-500 text-xs">{errors.company.message as string}</span>}
 					</div>
 
 					<div className="flex justify-end space-x-4 mt-8">
