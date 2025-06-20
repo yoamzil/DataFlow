@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 interface Client {
 	idCard: string;
@@ -26,7 +28,20 @@ type ClientFormData = Omit<Client, 'date'> & { date: string };
 export default function AddClientModal({ isOpen, onClose, client, companies }: AddClientModalProps) {
 	const { t } = useLanguage();
 
+	// Define Zod schema using t for error messages
+	const clientFormSchema = z.object({
+		idCard: z.string().min(1, t('form.errors.idRequired')),
+		name: z.string().min(1, t('form.errors.nameRequired')),
+		phone: z.string().min(1, t('form.errors.phoneRequired')),
+		date: z.string().min(1, t('form.errors.dateRequired')),
+		amount: z.number().min(5000, t('form.errors.amountInvalid')),
+		duration: z.number().min(12, t('form.errors.durationInvalid')),
+		fileId: z.string().min(1, t('form.errors.fileIdRequired')),
+		company: z.string().min(1, t('form.errors.companyRequired')),
+	});
+
 	const { register, handleSubmit, reset, formState: { errors } } = useForm<ClientFormData>({
+		resolver: zodResolver(clientFormSchema),
 		defaultValues: {
 			idCard: '',
 			name: '',
@@ -87,7 +102,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="text"
 							id="name"
-							{...register('name', { required: t('form.errors.nameRequired') })}
+							{...register('name')}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
@@ -100,7 +115,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="text"
 							id="idCard"
-							{...register('idCard', { required: t('form.errors.idRequired') })}
+							{...register('idCard')}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.idCard && <span className="text-red-500 text-xs">{errors.idCard.message as string}</span>}
@@ -113,7 +128,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="tel"
 							id="phone"
-							{...register('phone', { required: t('form.errors.phoneRequired') })}
+							{...register('phone')}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.phone && <span className="text-red-500 text-xs">{errors.phone.message as string}</span>}
@@ -126,7 +141,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="date"
 							id="date"
-							{...register('date', { required: t('form.errors.dateRequired') })}
+							{...register('date')}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.date && <span className="text-red-500 text-xs">{errors.date.message as string}</span>}
@@ -141,7 +156,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							id="amount"
 							step="0.01"
 							min="0"
-							{...register('amount', { required: t('form.errors.amountInvalid'), min: { value: 0.01, message: t('form.errors.amountInvalid') } })}
+							{...register('amount', { valueAsNumber: true })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.amount && <span className="text-red-500 text-xs">{errors.amount.message as string}</span>}
@@ -155,7 +170,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							type="number"
 							id="duration"
 							min="1"
-							{...register('duration', { required: 'Duration is required', min: { value: 1, message: t('form.errors.amountInvalid') } })}
+							{...register('duration', { valueAsNumber: true })}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.duration && <span className="text-red-500 text-xs">{errors.duration.message as string}</span>}
@@ -168,7 +183,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						<input
 							type="text"
 							id="fileId"
-							{...register('fileId', { required: t('form.errors.fileIdRequired') })}
+							{...register('fileId')}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						/>
 						{errors.fileId && <span className="text-red-500 text-xs">{errors.fileId.message as string}</span>}
@@ -180,7 +195,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 						</label>
 						<select
 							id="company"
-							{...register('company', { required: t('form.errors.companyRequired') })}
+							{...register('company')}
 							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 						>
 							<option value="">{t('form.placeholders.selectCompany')}</option>
