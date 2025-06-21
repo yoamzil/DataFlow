@@ -32,7 +32,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	const clientFormSchema = z.object({
 		idCard: z.string().min(1, t('form.errors.idRequired')),
 		name: z.string().min(1, t('form.errors.nameRequired')),
-		phone: z.string().min(1, t('form.errors.phoneRequired')),
+		phone: z.string().min(10, t('form.errors.phoneInvalid')),
 		date: z.string().min(1, t('form.errors.dateRequired')),
 		amount: z.number().min(5000, t('form.errors.amountInvalid')),
 		duration: z.number().min(12, t('form.errors.durationInvalid')),
