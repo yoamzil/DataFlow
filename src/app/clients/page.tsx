@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import AddClientModal from '../../components/AddClientModal';
+import toast from 'react-hot-toast';
 
 interface Client {
 	idCard: string;
@@ -121,8 +122,10 @@ export default function ClientsPage() {
 			try {
 				// For now, just remove from state
 				setClients(clients.filter(client => client.idCard !== id));
+				toast.success(t('form.success.deleted'));
 			} catch (error) {
 				console.error('Error deleting client:', error);
+				toast.error(t('form.errors.deleteFailed'));
 			}
 		}
 	};

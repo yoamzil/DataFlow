@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import toast, { Toast } from 'react-hot-toast';
 
 interface Client {
 	idCard: string;
@@ -78,6 +79,14 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 	const onSubmit = (data: ClientFormData) => {
 		// TODO: Implement form submission logic
+		if (client) {
+			// Update existing client logic
+			toast.success(t('form.success.updated'));
+		}
+		else {
+			// Add new client logic
+			toast.success(t('form.success.added'));
+		}
 		onClose();
 	};
 
