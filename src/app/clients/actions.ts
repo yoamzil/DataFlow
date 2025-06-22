@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function getClients() {
 	return prisma.client.findMany({
-		orderBy: { date: "asc" },
+		orderBy: { date: "desc" },
 	});
 }
 

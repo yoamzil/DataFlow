@@ -39,7 +39,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 	const [selectedCompany, setSelectedCompany] = useState('');
 	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 	const [editingClient, setEditingClient] = useState<Client | null>(null);
-	const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'name', direction: 'asc' });
+	const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'date', direction: 'desc' });
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {

@@ -45,7 +45,6 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 					.join(" ")
 			),
 		phone: z.string().min(10, t('form.errors.phoneInvalid'))
-			.max(10, t('form.errors.phoneInvalid'))
 			.transform(val =>
 				val
 					.replace(/[^0-9]/g, "") // Remove non-digits
