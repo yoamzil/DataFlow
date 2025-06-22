@@ -37,13 +37,13 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 		idCard: z.string().min(1, t('form.errors.idRequired')).transform(val => val.replace(/\s+/g, "").toUpperCase()),
 		name: z.string().min(1, t('form.errors.nameRequired'))
 			.transform(val =>
-			val
-				.trim()
-				.replace(/\s+/g, " ") // Replace multiple spaces with one
-				.split(" ")
-				.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-				.join(" ")
-		),
+				val
+					.trim()
+					.replace(/\s+/g, " ") // Replace multiple spaces with one
+					.split(" ")
+					.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+					.join(" ")
+			),
 		phone: z.string().min(10, t('form.errors.phoneInvalid'))
 			.max(10, t('form.errors.phoneInvalid'))
 			.transform(val =>
@@ -54,8 +54,10 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 			),
 		date: z.string().min(1, t('form.errors.dateRequired')),
 		amount: z.number().min(5000, t('form.errors.amountInvalid')),
-		duration: z.number().min(12, t('form.errors.durationInvalid')),
-		fileId: z.string().min(1, t('form.errors.fileIdRequired')).transform(val => val.replace(/\s+/g, "").toUpperCase()),
+		duration: z.number().min(12, t('form.errors.durationInvalid'))
+			.max(144, t('form.errors.durationInvalid')),
+		fileId: z.string().min(1, t('form.errors.fileIdRequired'))
+			.transform(val => val.replace(/\s+/g, "").toUpperCase()),
 		company: z.string().min(1, t('form.errors.companyRequired')),
 	});
 
