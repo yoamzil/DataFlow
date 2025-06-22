@@ -4,9 +4,12 @@ import { useLanguage } from '../context/LanguageContext';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import toast, { Toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { addClient, updateClient } from '@/app/clients/actions';
+
 
 interface Client {
+	id?: number;
 	idCard: string;
 	name: string;
 	phone: string;
@@ -78,9 +81,18 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	if (!isOpen) return null;
 
 	const onSubmit = (data: ClientFormData) => {
-		// TODO: Implement form submission logic
-		if (client) {
+		if (client && client.id !== undefined) {
 			// Update existing client logic
+			updateClient(client.id, {
+				name: data.name,
+				idCard: data.idCard,
+				phone: data.phone,
+				date: data.date,
+				amount: data.amount,
+				duration: data.duration,
+				fileId: data.fileId,
+				company: data.company
+			});
 			toast.success(t('form.success.updated'));
 		}
 		else {

@@ -12,6 +12,7 @@ import { deleteClient } from './actions';
 import { useRouter } from 'next/navigation';
 
 interface Client {
+	id?: number;
 	idCard: string;
 	name: string;
 	phone: string;
@@ -60,8 +61,8 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 
 		if (sortConfig.key) {
 			results.sort((a, b) => {
-				const aValue = a[sortConfig.key];
-				const bValue = b[sortConfig.key];
+				const aValue = a[sortConfig.key] ?? '';
+				const bValue = b[sortConfig.key] ?? '';
 
 				if (aValue < bValue) {
 					return sortConfig.direction === 'asc' ? -1 : 1;
@@ -85,7 +86,12 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 		setSortConfig({ key, direction });
 	};
 
-	const handleDelete = async (id: string) => {
+	const handleDelete = async (id?: number) => {
+		if (!id)
+		{
+			toast.error(t('form.errors.deleteFailed'));
+			return;
+		}
 		if (window.confirm(t('clients.confirmDelete'))) {
 			try {
 				await deleteClient(id);
@@ -243,7 +249,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 						<tbody className="bg-white divide-y divide-gray-200">
 							{paginatedClients.length > 0 ? (
 								paginatedClients.map((client) => (
-									<tr key={client.idCard} className="hover:bg-gray-50">
+									<tr key={client.id ?? client.idCard} className="hover:bg-gray-50">
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm font-medium text-gray-900">{client.name}</div>
 										</td>
@@ -284,7 +290,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 												<Edit className="h-4 w-4" />
 											</button>
 											<button
-												onClick={() => handleDelete(client.idCard)}
+												onClick={() => handleDelete(client.id)}
 												className="text-red-600 hover:text-red-900"
 											>
 												<Trash2 className="h-4 w-4" />

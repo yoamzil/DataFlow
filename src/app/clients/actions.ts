@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function getClients() {
 	return prisma.client.findMany({
-		orderBy: { date: 'asc' }
+		orderBy: { date: "asc" },
 	});
 }
 
@@ -32,9 +32,10 @@ export async function addClient(data: {
 }
 
 export async function updateClient(
-	idCard: string,
+	id: number,
 	data: {
 		name: string;
+		idCard: string;
 		phone: string;
 		date: string;
 		amount: number;
@@ -44,7 +45,7 @@ export async function updateClient(
 	}
 ) {
 	const result = await prisma.client.update({
-		where: { idCard },
+		where: { id },
 		data: {
 			...data,
 			date: new Date(data.date),
@@ -54,9 +55,9 @@ export async function updateClient(
 	return result;
 }
 
-export async function deleteClient(idCard: string) {
+export async function deleteClient(id: number) {
 	const result = await prisma.client.delete({
-		where: { idCard },
+		where: { id },
 	});
 	revalidatePath("/clients");
 	return result;
