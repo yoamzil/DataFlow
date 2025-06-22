@@ -25,7 +25,10 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<LanguageProvider>
 					<div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col">
-						<Toaster position="top-right" />
+						<Toaster position="top-right"
+							containerStyle={{
+								top: 80,
+							}} />
 						<Navbar />
 						<main className="flex-1 container mx-auto px-4 py-8">
 							{children}
