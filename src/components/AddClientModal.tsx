@@ -80,12 +80,26 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 	if (!isOpen) return null;
 
-	const onSubmit = (data: ClientFormData) => {
-		if (client && client.id !== undefined) {
-			// Update existing client logic
-			updateClient(client.id, {
-				name: data.name,
+	const onSubmit = async (data: ClientFormData) => {
+	if (client && client.id !== undefined) {
+		// Update existing client logic
+		await updateClient(client.id, {
+			name: data.name,
+			idCard: data.idCard,
+			phone: data.phone,
+			date: data.date,
+			amount: data.amount,
+			duration: data.duration,
+			fileId: data.fileId,
+			company: data.company
+		});
+		toast.success(t('form.success.updated'));
+	} else {
+		// Add new client logic
+		try {
+			await addClient({
 				idCard: data.idCard,
+				name: data.name,
 				phone: data.phone,
 				date: data.date,
 				amount: data.amount,
@@ -93,14 +107,16 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 				fileId: data.fileId,
 				company: data.company
 			});
-			toast.success(t('form.success.updated'));
-		}
-		else {
-			// Add new client logic
 			toast.success(t('form.success.added'));
+			reset();
+		} catch (error) {
+			toast.error(t('form.errors.saveFailed'));
+			console.error('Error adding client:', error);
+			return;
 		}
-		onClose();
-	};
+	}
+	onClose();
+};
 
 	return (
 		<div className="fixed inset-0 bg-white/5 backdrop-blur-sm  flex items-center justify-center p-4 ">
