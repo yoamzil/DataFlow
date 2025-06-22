@@ -21,13 +21,14 @@ export async function addClient(data: {
 	fileId: string;
 	company: string;
 }) {
-	return prisma.client.create({
+	const result = await prisma.client.create({
 		data: {
 			...data,
 			date: new Date(data.date),
 		},
 	});
 	revalidatePath("/clients");
+	return result;
 }
 
 export async function updateClient(
@@ -42,7 +43,7 @@ export async function updateClient(
 		company: string;
 	}
 ) {
-	return prisma.client.update({
+	const result = await prisma.client.update({
 		where: { idCard },
 		data: {
 			...data,
@@ -50,11 +51,13 @@ export async function updateClient(
 		},
 	});
 	revalidatePath("/clients");
+	return result;
 }
 
 export async function deleteClient(idCard: string) {
-	return prisma.client.delete({
+	const result = await prisma.client.delete({
 		where: { idCard },
 	});
 	revalidatePath("/clients");
+	return result;
 }
