@@ -10,7 +10,7 @@ datasource db {
 
 model Client {
     id        Int      @id @default(autoincrement())
-    idCard    String   @unique
+    idCard    String
     name      String
     phone     String
     date      DateTime

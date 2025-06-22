@@ -34,13 +34,28 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 
 	// Define Zod schema using t for error messages
 	const clientFormSchema = z.object({
-		idCard: z.string().min(1, t('form.errors.idRequired')),
-		name: z.string().min(1, t('form.errors.nameRequired')),
-		phone: z.string().min(10, t('form.errors.phoneInvalid')),
+		idCard: z.string().min(1, t('form.errors.idRequired')).transform(val => val.replace(/\s+/g, "").toUpperCase()),
+		name: z.string().min(1, t('form.errors.nameRequired'))
+			.transform(val =>
+			val
+				.trim()
+				.replace(/\s+/g, " ") // Replace multiple spaces with one
+				.split(" ")
+				.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+				.join(" ")
+		),
+		phone: z.string().min(10, t('form.errors.phoneInvalid'))
+			.max(10, t('form.errors.phoneInvalid'))
+			.transform(val =>
+				val
+					.replace(/[^0-9]/g, "") // Remove non-digits
+					.replace(/(.{2})/g, "$1 ") // Add space every 2 digits
+					.trim() // Remove trailing space
+			),
 		date: z.string().min(1, t('form.errors.dateRequired')),
 		amount: z.number().min(5000, t('form.errors.amountInvalid')),
 		duration: z.number().min(12, t('form.errors.durationInvalid')),
-		fileId: z.string().min(1, t('form.errors.fileIdRequired')),
+		fileId: z.string().min(1, t('form.errors.fileIdRequired')).transform(val => val.replace(/\s+/g, "").toUpperCase()),
 		company: z.string().min(1, t('form.errors.companyRequired')),
 	});
 
@@ -81,25 +96,11 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	if (!isOpen) return null;
 
 	const onSubmit = async (data: ClientFormData) => {
-	if (client && client.id !== undefined) {
-		// Update existing client logic
-		await updateClient(client.id, {
-			name: data.name,
-			idCard: data.idCard,
-			phone: data.phone,
-			date: data.date,
-			amount: data.amount,
-			duration: data.duration,
-			fileId: data.fileId,
-			company: data.company
-		});
-		toast.success(t('form.success.updated'));
-	} else {
-		// Add new client logic
-		try {
-			await addClient({
-				idCard: data.idCard,
+		if (client && client.id !== undefined) {
+			// Update existing client logic
+			await updateClient(client.id, {
 				name: data.name,
+				idCard: data.idCard,
 				phone: data.phone,
 				date: data.date,
 				amount: data.amount,
@@ -107,16 +108,30 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 				fileId: data.fileId,
 				company: data.company
 			});
-			toast.success(t('form.success.added'));
-			reset();
-		} catch (error) {
-			toast.error(t('form.errors.saveFailed'));
-			console.error('Error adding client:', error);
-			return;
+			toast.success(t('form.success.updated'));
+		} else {
+			// Add new client logic
+			try {
+				await addClient({
+					idCard: data.idCard,
+					name: data.name,
+					phone: data.phone,
+					date: data.date,
+					amount: data.amount,
+					duration: data.duration,
+					fileId: data.fileId,
+					company: data.company
+				});
+				toast.success(t('form.success.added'));
+				reset();
+			} catch (error) {
+				toast.error(t('form.errors.saveFailed'));
+				console.error('Error adding client:', error);
+				return;
+			}
 		}
-	}
-	onClose();
-};
+		onClose();
+	};
 
 	return (
 		<div className="fixed inset-0 bg-white/5 backdrop-blur-sm  flex items-center justify-center p-4 ">

@@ -21,6 +21,14 @@ export async function addClient(data: {
 	fileId: string;
 	company: string;
 }) {
+	const existing = await prisma.client.findFirst({
+		where: { idCard: data.idCard },
+	});
+	if (existing) {
+		if (existing.name !== data.name || existing.phone !== data.phone) {
+			throw new Error("Client with this ID card already exists with different name or phone.");
+		}
+	}
 	const result = await prisma.client.create({
 		data: {
 			...data,
@@ -44,6 +52,14 @@ export async function updateClient(
 		company: string;
 	}
 ) {
+	const existing = await prisma.client.findFirst({
+		where: { idCard: data.idCard, id: { not: id } },
+	});
+	if (existing) {
+		if (existing.name !== data.name || existing.phone !== data.phone) {
+			throw new Error("Client with this ID card already exists with different name or phone.");
+		}
+	}
 	const result = await prisma.client.update({
 		where: { id },
 		data: {
