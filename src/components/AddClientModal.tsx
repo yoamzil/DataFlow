@@ -135,8 +135,8 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	};
 
 	return (
-		<div className="fixed inset-0 bg-white/5 backdrop-blur-sm  flex items-center justify-center p-4 ">
-			<div className="bg-white rounded-lg p-6 w-full max-w-md  shadow-2xl">
+		<div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
+			<div className="bg-white rounded-2xl p-6 w-full max-w-2xl ">
 				<div className="flex justify-between items-center mb-6">
 					<h2 className="text-xl font-bold text-gray-800">
 						{client ? t('form.title.edit') : t('form.title.add')}
@@ -146,119 +146,130 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 					</button>
 				</div>
 
-				<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+				<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+					{/* Row 1: Name and ID Card */}
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div>
+							<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.name')}
+							</label>
+							<input
+								type="text"
+								id="name"
+								{...register('name')}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
+						</div>
 
-					<div>
-						<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.name')}
-						</label>
-						<input
-							type="text"
-							id="name"
-							{...register('name')}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
+						<div>
+							<label htmlFor="idCard" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.id')}
+							</label>
+							<input
+								type="text"
+								id="idCard"
+								{...register('idCard')}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.idCard && <span className="text-red-500 text-xs">{errors.idCard.message as string}</span>}
+						</div>
 					</div>
 
-					<div>
-						<label htmlFor="idCard" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.id')}
-						</label>
-						<input
-							type="text"
-							id="idCard"
-							{...register('idCard')}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.idCard && <span className="text-red-500 text-xs">{errors.idCard.message as string}</span>}
+					{/* Row 2: Phone and Date */}
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div>
+							<label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.phone')}
+							</label>
+							<input
+								type="tel"
+								id="phone"
+								{...register('phone')}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.phone && <span className="text-red-500 text-xs">{errors.phone.message as string}</span>}
+						</div>
+
+						<div>
+							<label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.date')}
+							</label>
+							<input
+								type="date"
+								id="date"
+								{...register('date')}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.date && <span className="text-red-500 text-xs">{errors.date.message as string}</span>}
+						</div>
 					</div>
 
-					<div>
-						<label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.phone')}
-						</label>
-						<input
-							type="tel"
-							id="phone"
-							{...register('phone')}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.phone && <span className="text-red-500 text-xs">{errors.phone.message as string}</span>}
+					{/* Row 3: Amount and Duration */}
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div>
+							<label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.amount')}
+							</label>
+							<input
+								type="number"
+								id="amount"
+								step="0.01"
+								min="0"
+								{...register('amount', { valueAsNumber: true })}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.amount && <span className="text-red-500 text-xs">{errors.amount.message as string}</span>}
+						</div>
+
+						<div>
+							<label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.duration')}
+							</label>
+							<input
+								type="number"
+								id="duration"
+								min="1"
+								{...register('duration', { valueAsNumber: true })}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.duration && <span className="text-red-500 text-xs">{errors.duration.message as string}</span>}
+						</div>
 					</div>
 
-					<div>
-						<label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.date')}
-						</label>
-						<input
-							type="date"
-							id="date"
-							{...register('date')}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.date && <span className="text-red-500 text-xs">{errors.date.message as string}</span>}
-					</div>
+					{/* Row 4: File ID and Company */}
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<div>
+							<label htmlFor="fileId" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.fileId')}
+							</label>
+							<input
+								type="text"
+								id="fileId"
+								{...register('fileId')}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							/>
+							{errors.fileId && <span className="text-red-500 text-xs">{errors.fileId.message as string}</span>}
+						</div>
 
-					<div>
-						<label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.amount')}
-						</label>
-						<input
-							type="number"
-							id="amount"
-							step="0.01"
-							min="0"
-							{...register('amount', { valueAsNumber: true })}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.amount && <span className="text-red-500 text-xs">{errors.amount.message as string}</span>}
-					</div>
-
-					<div>
-						<label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.duration')}
-						</label>
-						<input
-							type="number"
-							id="duration"
-							min="1"
-							{...register('duration', { valueAsNumber: true })}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.duration && <span className="text-red-500 text-xs">{errors.duration.message as string}</span>}
-					</div>
-
-					<div>
-						<label htmlFor="fileId" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.fileId')}
-						</label>
-						<input
-							type="text"
-							id="fileId"
-							{...register('fileId')}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						/>
-						{errors.fileId && <span className="text-red-500 text-xs">{errors.fileId.message as string}</span>}
-					</div>
-
-					<div>
-						<label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-							{t('form.labels.company')}
-						</label>
-						<select
-							id="company"
-							{...register('company')}
-							className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-						>
-							<option value="">{t('form.placeholders.selectCompany')}</option>
-							{companies.map((company) => (
-								<option key={company} value={company}>
-									{company}
-								</option>
-							))}
-						</select>
-						{errors.company && <span className="text-red-500 text-xs">{errors.company.message as string}</span>}
+						<div>
+							<label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+								{t('form.labels.company')}
+							</label>
+							<select
+								id="company"
+								{...register('company')}
+								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+							>
+								<option value="">{t('form.placeholders.selectCompany')}</option>
+								{companies.map((company) => (
+									<option key={company} value={company}>
+										{company}
+									</option>
+								))}
+							</select>
+							{errors.company && <span className="text-red-500 text-xs">{errors.company.message as string}</span>}
+						</div>
 					</div>
 
 					<div className="flex justify-end space-x-4 mt-8">
