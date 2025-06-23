@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useForm } from 'react-hook-form';
@@ -31,6 +31,8 @@ type ClientFormData = Omit<Client, 'date'> & { date: string };
 
 export default function AddClientModal({ isOpen, onClose, client, companies }: AddClientModalProps) {
 	const { t } = useLanguage();
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	// Define Zod schema using t for error messages
 	const clientFormSchema = z.object({
@@ -97,22 +99,21 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	if (!isOpen) return null;
 
 	const onSubmit = async (data: ClientFormData) => {
-		if (client && client.id !== undefined) {
-			// Update existing client logic
-			await updateClient(client.id, {
-				name: data.name,
-				idCard: data.idCard,
-				phone: data.phone,
-				date: data.date,
-				amount: data.amount,
-				duration: data.duration,
-				fileId: data.fileId,
-				company: data.company
-			});
-			toast.success(t('form.success.updated'));
-		} else {
-			// Add new client logic
-			try {
+		setIsLoading(true);
+		try {
+			if (client && client.id !== undefined) {
+				await updateClient(client.id, {
+					name: data.name,
+					idCard: data.idCard,
+					phone: data.phone,
+					date: data.date,
+					amount: data.amount,
+					duration: data.duration,
+					fileId: data.fileId,
+					company: data.company
+				});
+				toast.success(t('form.success.updated'));
+			} else {
 				await addClient({
 					idCard: data.idCard,
 					name: data.name,
@@ -125,13 +126,14 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 				});
 				toast.success(t('form.success.added'));
 				reset();
-			} catch (error) {
-				toast.error(t('form.errors.saveFailed'));
-				console.error('Error adding client:', error);
-				return;
 			}
+			onClose();
+		} catch (error) {
+			toast.error(t('form.errors.saveFailed'));
+			console.error('Error adding client:', error);
+		} finally {
+			setIsLoading(false);
 		}
-		onClose();
 	};
 
 	return (
@@ -277,13 +279,21 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							type="button"
 							onClick={onClose}
 							className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-150"
+							disabled={isLoading}
 						>
 							{t('form.buttons.cancel')}
 						</button>
 						<button
 							type="submit"
-							className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150"
+							disabled={isLoading}
+							className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150 flex items-center justify-center"
 						>
+							{isLoading && (
+								<svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
+									<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+									<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+								</svg>
+							)}
 							{client ? t('form.buttons.update') : t('form.buttons.add')}
 						</button>
 					</div>
