@@ -217,7 +217,6 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 								type="number"
 								id="amount"
 								step="0.01"
-								min="0"
 								{...register('amount', { valueAsNumber: true })}
 								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 							/>
@@ -231,7 +230,6 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 							<input
 								type="number"
 								id="duration"
-								min="1"
 								{...register('duration', { valueAsNumber: true })}
 								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 							/>
