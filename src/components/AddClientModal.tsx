@@ -129,7 +129,18 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 			}
 			onClose();
 		} catch (error) {
-			toast.error(t('form.errors.saveFailed'));
+			// Handle specific error types
+			if (error instanceof Error) {
+				if (error.message.includes('ID card already exists')) {
+					toast.error('Client with this ID card already exists with different name or phone.');
+				} else {
+					// Generic error for other cases
+					toast.error(t('form.errors.saveFailed'));
+				}
+			} else {
+				// Fallback for non-Error objects
+				toast.error(t('form.errors.saveFailed'));
+			}
 			console.error('Error adding client:', error);
 		} finally {
 			setIsLoading(false);
