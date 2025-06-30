@@ -1,4 +1,4 @@
-import { getClients } from './actions';
+import { getClients } from '../../actions/clients';
 import ClientsTable from './ClientsTable';
 
 export default async function ClientsPage() {

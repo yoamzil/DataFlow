@@ -8,7 +8,7 @@ import {
 import { useLanguage } from '../../context/LanguageContext';
 import AddClientModal from '../../components/AddClientModal';
 import toast from 'react-hot-toast';
-import { deleteClient } from './actions';
+import { deleteClient } from '../../actions/clients';
 import { useRouter } from 'next/navigation';
 
 interface Client {
