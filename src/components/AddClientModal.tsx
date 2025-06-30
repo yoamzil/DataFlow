@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
-import { addClient, updateClient } from '@/app/clients/actions';
+import { addClient, updateClient } from '@/actions/clients';
 
 
 interface Client {
@@ -148,7 +148,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	};
 
 	return (
-		<div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
+		<div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
 			<div className="bg-white rounded-2xl p-6 w-full max-w-2xl ">
 				<div className="flex justify-between items-center mb-6">
 					<h2 className="text-xl font-bold text-gray-800">
