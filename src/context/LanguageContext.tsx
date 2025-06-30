@@ -12,6 +12,12 @@ interface LanguageContextType {
 
 const translations = {
 	en: {
+		'login.admin': 'Administrator',
+		'login.welcome': 'Welcome back',
+		'login.password': 'Password',
+		'login.enterPassword': 'Enter your password',
+		'login.submit': 'Sign In',
+		'login.version': 'DataFlow Client Management • Version 1.0',
 		'nav.dashboard': 'Dashboard',
 		'nav.clients': 'Clients',
 		'nav.money': 'Money Calculation',
@@ -77,6 +83,12 @@ const translations = {
 		'form.success.deleted': 'Client deleted successfully',
 	},
 	fr: {
+		'login.admin': 'Administrateur',
+		'login.welcome': 'Bienvenue',
+		'login.password': 'Mot de passe',
+		'login.enterPassword': 'Entrez votre mot de passe',
+		'login.submit': 'Se connecter',
+		'login.version': 'DataFlow Gestion Client • Version 1.0',
 		'nav.dashboard': 'Tableau de bord',
 		'nav.clients': 'Clients',
 		'nav.money': 'Calcul d\'argent',
