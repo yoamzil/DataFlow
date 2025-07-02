@@ -2,6 +2,11 @@ import { Toaster } from 'react-hot-toast'
 import { LanguageProvider } from '../context/LanguageContext'
 import '../styles/globals.css'
 import LayoutWrapper from '../components/LayoutWrapper'
+import localFont from 'next/font/local'
+ 
+const myFont = localFont({
+  src: '../../public/Fonts/Inter-VariableFont_opsz,wght.ttf',
+})
 
 export const metadata = {
 	title: 'DataFlow - Client Management Solution',
@@ -10,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" className={myFont.className}>
 			<body>
 				<LanguageProvider>
 					<Toaster position="top-right" containerStyle={{ top: 80 }} />
