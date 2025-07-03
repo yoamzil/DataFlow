@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useLanguage } from '../context/LanguageContext'
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { logout } from '@/actions/logout';
 
 const Navbar = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -38,7 +39,8 @@ const Navbar = () => {
 		setIsDropdownOpen(false);
 	};
 
-	const handleLogout = () => {
+	const handleLogout = async () => {
+		await logout();
 		router.push('/login');
 		setIsDropdownOpen(false);
 	};

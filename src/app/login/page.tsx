@@ -4,14 +4,28 @@ import { User, Eye, EyeOff, ArrowRight, Globe } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '../../context/LanguageContext';
+import { login } from '@/actions/auth';
 
 export default function LoginPage() {
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	const router = useRouter();
 	const { language, setLanguage, t } = useLanguage();
 
 	const toggleLanguage = () => {
 		setLanguage(language === 'en' ? 'fr' : 'en');
+	};
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const isAuthenticated = await login(password);
+		if (isAuthenticated) {
+			router.push('/');
+		}
+		else {
+			setError('Incorrect password');
+		}
 	};
 
 	return (
@@ -56,10 +70,7 @@ export default function LoginPage() {
 				{/* Password Form */}
 				<form
 					className="space-y-6"
-					onSubmit={e => {
-						e.preventDefault();
-						router.push('/');
-					}}
+					onSubmit={handleSubmit}
 				>
 					<div className="space-y-2">
 						<label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -72,6 +83,8 @@ export default function LoginPage() {
 								className="text-gray-700 w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
 								placeholder={t('login.enterPassword')}
 								autoFocus
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
 							/>
 							<button
 								type="button"
@@ -83,6 +96,12 @@ export default function LoginPage() {
 							</button>
 						</div>
 					</div>
+					{/* Error Message */}
+					{error && (
+						<div className="bg-red-50 border border-red-200 rounded-lg p-3">
+							<p className="text-red-600 text-sm">{error}</p>
+						</div>
+					)}
 
 					{/* Sign In Button */}
 					<button

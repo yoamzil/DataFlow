@@ -3,8 +3,10 @@
 import { ArrowRight, Database, Users, Calculator, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { useLanguage } from '../context/LanguageContext'
+import { useAuthGuard } from '../hooks/useAuthGuard'
 
 export default function Home() {
+	useAuthGuard();
 	const { t } = useLanguage();
 
 	return (
