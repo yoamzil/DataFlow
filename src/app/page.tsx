@@ -6,9 +6,10 @@ import { useLanguage } from '../context/LanguageContext'
 import { useAuthGuard } from '../hooks/useAuthGuard'
 
 export default function Home() {
-	useAuthGuard();
+	const checked = useAuthGuard();
 	const { t } = useLanguage();
-
+	
+	if (!checked) return null;
 	return (
 		<div className="max-w-6xl mx-auto">
 			<div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 shadow-2xl">
