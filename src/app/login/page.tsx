@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Eye, EyeOff, ArrowRight, Globe } from 'lucide-react';
+import { User, Eye, EyeOff, ArrowRight, Globe, Loader2, Lock } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '../../context/LanguageContext';
@@ -10,6 +10,7 @@ export default function LoginPage() {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 	const { language, setLanguage, t } = useLanguage();
 
@@ -19,11 +20,13 @@ export default function LoginPage() {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setIsLoading(true);
 		const isAuthenticated = await login(password);
 		if (isAuthenticated) {
 			router.push('/');
 		}
 		else {
+			setIsLoading(false);
 			setError('Incorrect password');
 		}
 	};
@@ -106,11 +109,21 @@ export default function LoginPage() {
 					{/* Sign In Button */}
 					<button
 						type="submit"
-						className="w-full flex items-center justify-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+						className={`w-full flex items-center justify-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 shadow-lg hover:shadow-xl transform hover:scale-[1.02] ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`}
+						disabled={isLoading}
 					>
 						<div className="flex items-center">
-							{t('login.submit')}
-							<ArrowRight className="ml-2 h-5 w-5" />
+							{isLoading ? (
+								<>
+									<Loader2 className="animate-spin h-5 w-5 mr-2" />
+									{t('login.submit')}
+								</>
+							) : (
+								<>
+									{t('login.submit')}
+									<ArrowRight className="ml-2 h-5 w-5" />
+								</>
+							)}
 						</div>
 					</button>
 				</form>
