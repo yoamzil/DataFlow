@@ -12,7 +12,7 @@ const Navbar = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const pathname = usePathname()
-	const { language, setLanguage, t } = useLanguage()
+	const { t } = useLanguage()
 	const router = useRouter()
 	const isActive = (path: string) => pathname === path
 
@@ -110,7 +110,7 @@ const Navbar = () => {
 												className="cursor-pointer w-full text-left px-3 py-2 text-sm rounded-lg flex items-center transition-all duration-150 text-gray-700 hover:bg-gray-50"
 											>
 												<Settings className="h-4 w-4 mr-3" />
-												Settings
+												{t('nav.settings')}
 											</button>
 										</div>
 										{/* Divider */}
@@ -122,7 +122,7 @@ const Navbar = () => {
 												className="cursor-pointer w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-all duration-150 flex items-center rounded-lg font-medium"
 											>
 												<LogOut className="h-4 w-4 mr-3" />
-												Log Out
+												{t('nav.logout')}
 											</button>
 										</div>
 									</div>
