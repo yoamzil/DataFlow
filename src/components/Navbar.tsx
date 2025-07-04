@@ -1,8 +1,7 @@
-// src/components/Navbar.tsx
 'use client'
 
 import Link from 'next/link'
-import { Database, Users, Calculator, Settings, Globe, LogOut, User } from 'lucide-react';
+import { Database, Users, Calculator, Settings, LogOut, User } from 'lucide-react';
 import { usePathname } from 'next/navigation'
 import { useLanguage } from '../context/LanguageContext'
 import { useEffect, useRef, useState } from 'react';
@@ -16,10 +15,6 @@ const Navbar = () => {
 	const { language, setLanguage, t } = useLanguage()
 	const router = useRouter()
 	const isActive = (path: string) => pathname === path
-
-	const toggleLanguage = () => {
-		setLanguage(language === 'en' ? 'fr' : 'en')
-	}
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
