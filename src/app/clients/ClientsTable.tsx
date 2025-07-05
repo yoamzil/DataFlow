@@ -87,8 +87,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 	};
 
 	const handleDelete = async (id?: number) => {
-		if (!id)
-		{
+		if (!id) {
 			toast.error(t('form.errors.deleteFailed'));
 			return;
 		}

@@ -26,7 +26,9 @@ export async function addClient(data: {
 	});
 	if (existing) {
 		if (existing.name !== data.name || existing.phone !== data.phone) {
-			throw new Error("Client with this ID card already exists with different name or phone.");
+			throw new Error(
+				"Client with this ID card already exists with different name or phone."
+			);
 		}
 	}
 	const result = await prisma.client.create({
@@ -57,7 +59,9 @@ export async function updateClient(
 	});
 	if (existing) {
 		if (existing.name !== data.name || existing.phone !== data.phone) {
-			throw new Error("Client with this ID card already exists with different name or phone.");
+			throw new Error(
+				"Client with this ID card already exists with different name or phone."
+			);
 		}
 	}
 	const result = await prisma.client.update({

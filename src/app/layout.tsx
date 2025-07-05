@@ -3,9 +3,9 @@ import { LanguageProvider } from '../context/LanguageContext'
 import '../styles/globals.css'
 import LayoutWrapper from '../components/LayoutWrapper'
 import localFont from 'next/font/local'
- 
+
 const myFont = localFont({
-  src: '../../public/Fonts/Inter-VariableFont_opsz,wght.ttf',
+	src: '../../public/Fonts/Inter-VariableFont_opsz,wght.ttf',
 })
 
 export const metadata = {
