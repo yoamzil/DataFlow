@@ -29,7 +29,7 @@ interface SortConfig {
 }
 
 const companies = ['Sorec', 'Wafasalaf', 'Salafin', 'Vivalis', 'Sofac'];
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 8;
 
 export default function ClientsTable({ initialClients }: { initialClients: Client[] }) {
 	const { t } = useLanguage();
