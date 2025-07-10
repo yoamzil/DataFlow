@@ -1,9 +1,9 @@
 'use client';
 
-import { User, Eye, EyeOff, ArrowRight, Globe, Loader2, Lock } from 'lucide-react';
+import { User, Eye, EyeOff, ArrowRight, Globe, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { login } from '@/actions/auth';
 
 export default function LoginPage() {

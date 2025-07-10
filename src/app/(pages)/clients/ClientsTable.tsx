@@ -5,10 +5,10 @@ import {
 	Search, Plus, Filter, Edit, Trash2, ChevronDown,
 	ChevronUp, FileSpreadsheet, ChevronLeft, ChevronRight
 } from 'lucide-react';
-import { useLanguage } from '../../context/LanguageContext';
-import AddClientModal from '../../components/AddClientModal';
+import { useLanguage } from '../../../context/LanguageContext';
+import AddClientModal from '../../../components/AddClientModal';
 import toast from 'react-hot-toast';
-import { deleteClient } from '../../actions/clients';
+import { deleteClient } from '../../../actions/clients';
 import { useRouter } from 'next/navigation';
 
 interface Client {
