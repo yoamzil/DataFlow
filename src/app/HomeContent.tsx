@@ -8,7 +8,7 @@ export default function HomeContent() {
 	const { t } = useLanguage();
 
 	return (
-		<div className="max-w-6xl mx-auto">
+		<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
 			<div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 shadow-2xl">
 				<div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
 				<div className="relative px-8 py-16 sm:px-16 sm:py-24">
@@ -68,7 +68,7 @@ export default function HomeContent() {
 					</div>
 				</div>
 			</div>
-			<div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+			{/* <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
 				<div className="p-6">
 					<h2 className="text-xl font-semibold text-gray-900 mb-4">{t('quickTips.title')}</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -93,7 +93,7 @@ export default function HomeContent() {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	)
 } 
