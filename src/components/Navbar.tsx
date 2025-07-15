@@ -92,7 +92,7 @@ const Navbar = () => {
 						<div className="relative ml-4" ref={dropdownRef}>
 							<button
 								onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-								className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${isDropdownOpen
+								className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${isDropdownOpen
 									? 'bg-blue-50 text-blue-600 shadow-md'
 									: 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-700'
 									}`}
