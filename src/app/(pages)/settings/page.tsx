@@ -9,26 +9,6 @@ import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
 
-// Validation schemas
-const passwordSchema = z.object({
-	currentPassword: z.string().min(1, 'Current password is required'),
-	newPassword: z.string()
-		.min(8, 'Password must be at least 8 characters')
-		.regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain uppercase, lowercase, and number'),
-	confirmPassword: z.string()
-}).refine((data) => data.newPassword === data.confirmPassword, {
-	message: "Passwords don't match",
-	path: ["confirmPassword"],
-});
-
-const autoLockSchema = z.object({
-	enabled: z.boolean(),
-	duration: z.number().min(1).max(60)
-});
-
-type PasswordFormData = z.infer<typeof passwordSchema>;
-type AutoLockFormData = z.infer<typeof autoLockSchema>;
-
 const Settings = () => {
 	const { language, setLanguage, t } = useLanguage();
 	const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -38,6 +18,25 @@ const Settings = () => {
 		enabled: false,
 		duration: 10
 	});
+
+	// Validation schemas
+	const passwordSchema = z.object({
+		currentPassword: z.string().min(1, t('settings.currentPasswordError')),
+		newPassword: z.string().min(4, t('settings.newPasswordError')),
+		confirmPassword: z.string()
+	}).refine((data) => data.newPassword === data.confirmPassword, {
+		message: t('settings.confirmPasswordMismatch'),
+		path: ["confirmPassword"],
+	});
+
+	const autoLockSchema = z.object({
+		enabled: z.boolean(),
+		duration: z.number().min(1).max(60)
+	});
+
+	type PasswordFormData = z.infer<typeof passwordSchema>;
+	type AutoLockFormData = z.infer<typeof autoLockSchema>;
+
 
 	// Password form
 	const passwordForm = useForm<PasswordFormData>({
@@ -68,27 +67,27 @@ const Settings = () => {
 				return;
 			}
 
-			toast.success('Password changed successfully');
+			toast.success(t('settings.passwordUpdated'));
 			passwordForm.reset();
 		} catch (error) {
-			toast.error('Failed to change password');
+			toast.error(t('settings.error'));
 		}
 	};
 
 	const onAutoLockSubmit = (data: AutoLockFormData) => {
 		setAutoLockSettings(data);
-		toast.success('Auto-lock settings updated');
+		toast.success(t('settings.autoLock.toast'));
 	};
 
 	const handleLanguageChange = (newLanguage: 'en' | 'fr') => {
 		setLanguage(newLanguage);
-		toast.success(`Language changed to ${newLanguage === 'en' ? 'English' : 'Français'}`);
 	};
 
 	const getDurationText = (duration: number) => {
 		if (duration === 1) return '1 minute';
 		if (duration < 60) return `${duration} minutes`;
-		return `${Math.floor(duration / 60)} hour${Math.floor(duration / 60) > 1 ? 's' : ''}`;
+		const hours = Math.floor(duration / 60);
+		return `${hours} ${t(hours > 1 ? 'settings.autoLock.hours' : 'settings.autoLock.hour')}`;
 	};
 	return (
 		<div className="max-w-5xl mx-auto">
@@ -98,8 +97,8 @@ const Settings = () => {
 					<SettingsIcon className="h-6 w-6 text-white" />
 				</div>
 				<div>
-					<h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-					<p className="text-gray-600 mt-1">Manage your account preferences and security settings</p>
+					<h1 className="text-3xl font-bold text-gray-900">{t("settings.title")}</h1>
+					<p className="text-gray-600 mt-1">{t("settings.subtitle")}</p>
 				</div>
 			</div>
 
@@ -112,8 +111,8 @@ const Settings = () => {
 								<Globe className="h-6 w-6 text-blue-600" />
 							</div>
 							<div>
-								<h2 className="text-xl font-semibold text-gray-900">Language</h2>
-								<p className="text-sm text-gray-500 mt-1">Choose your preferred language</p>
+								<h2 className="text-xl font-semibold text-gray-900">{t("settings.language")}</h2>
+								<p className="text-sm text-gray-500 mt-1">{t('settings.language.subtitle')}</p>
 							</div>
 						</div>
 					</div>
@@ -128,7 +127,7 @@ const Settings = () => {
 						>
 							<div className="flex items-center">
 								<img src="/flags/gb.svg" alt="English flag" className="w-7 h-7 mr-4 inline-block align-middle" />
-								<span className="font-semibold">English</span>
+								<span className="font-semibold">{t("settings.language.en")}</span>
 							</div>
 							{language === 'en' && <Check className="h-5 w-5 text-blue-600" />}
 						</button>
@@ -142,7 +141,7 @@ const Settings = () => {
 						>
 							<div className="flex items-center">
 								<img src="/flags/fr.svg" alt="French flag" className="w-7 h-7 mr-4 inline-block align-middle" />
-								<span className="font-semibold">Français</span>
+								<span className="font-semibold">{t("settings.language.fr")}</span>
 							</div>
 							{language === 'fr' && <Check className="h-5 w-5 text-blue-600" />}
 						</button>
@@ -157,8 +156,8 @@ const Settings = () => {
 								<Lock className="h-6 w-6 text-red-600" />
 							</div>
 							<div>
-								<h2 className="text-xl font-semibold text-gray-900">Change Password</h2>
-								<p className="text-sm text-gray-500 mt-1">Update your account password for security</p>
+								<h2 className="text-xl font-semibold text-gray-900">{t("settings.changePassword")}</h2>
+								<p className="text-sm text-gray-500 mt-1">{t("settings.changePassword.subtitle")}</p>
 							</div>
 						</div>
 					</div>
@@ -167,7 +166,7 @@ const Settings = () => {
 						{/* Current Password */}
 						<div>
 							<label className="block text-sm font-semibold text-gray-700 mb-3">
-								Current Password
+								{t("settings.currentPassword")}
 							</label>
 							<div className="relative">
 								<input
@@ -177,7 +176,7 @@ const Settings = () => {
 										? 'border-red-300 bg-red-50'
 										: 'border-gray-200 bg-gray-50 focus:bg-white hover:border-gray-300'
 										}`}
-									placeholder="Enter your current password"
+									placeholder={t("settings.currentPassword.subtitle")}
 								/>
 								<button
 									type="button"
@@ -198,7 +197,7 @@ const Settings = () => {
 						{/* New Password */}
 						<div>
 							<label className="block text-sm font-semibold text-gray-700 mb-3">
-								New Password
+								{t("settings.newPassword")}
 							</label>
 							<div className="relative">
 								<input
@@ -208,7 +207,7 @@ const Settings = () => {
 										? 'border-red-300 bg-red-50'
 										: 'border-gray-200 bg-gray-50 focus:bg-white hover:border-gray-300'
 										}`}
-									placeholder="Enter your new password"
+									placeholder={t('settings.newPassword.subtitle')}
 								/>
 								<button
 									type="button"
@@ -224,15 +223,12 @@ const Settings = () => {
 									{passwordForm.formState.errors.newPassword.message}
 								</p>
 							)}
-							<div className="mt-2 text-xs text-gray-500">
-								Password must contain at least 8 characters with uppercase, lowercase, and numbers
-							</div>
 						</div>
 
 						{/* Confirm Password */}
 						<div>
 							<label className="block text-sm font-semibold text-gray-700 mb-3">
-								Confirm New Password
+								{t("settings.confirmPassword")}
 							</label>
 							<div className="relative">
 								<input
@@ -242,7 +238,7 @@ const Settings = () => {
 										? 'border-red-300 bg-red-50'
 										: 'border-gray-200 bg-gray-50 focus:bg-white hover:border-gray-300'
 										}`}
-									placeholder="Confirm your new password"
+									placeholder={t("settings.confirmPassword.subtitle")}
 								/>
 								<button
 									type="button"
@@ -268,12 +264,12 @@ const Settings = () => {
 							{passwordForm.formState.isSubmitting ? (
 								<div className="flex items-center">
 									<div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-									Updating Password...
+									{t("settings.updating")}
 								</div>
 							) : (
 								<div className="flex items-center">
 									<Save className="h-5 w-5 mr-2" />
-									Update Password
+									{t("settings.updatepassword")}
 								</div>
 							)}
 						</button>
@@ -288,8 +284,8 @@ const Settings = () => {
 								<Clock className="h-6 w-6 text-orange-600" />
 							</div>
 							<div>
-								<h2 className="text-xl font-semibold text-gray-900">Auto-Lock Settings</h2>
-								<p className="text-sm text-gray-500 mt-1">Configure automatic screen locking</p>
+								<h2 className="text-xl font-semibold text-gray-900">{t('settings.autoLock.title')}</h2>
+								<p className="text-sm text-gray-500 mt-1">{t('settings.autoLock.subtitle')}</p>
 							</div>
 						</div>
 					</div>
@@ -298,8 +294,8 @@ const Settings = () => {
 						{/* Enable Auto-Lock Toggle */}
 						<div className="flex items-center justify-between p-6 bg-gray-50 rounded-2xl">
 							<div>
-								<h3 className="text-base font-semibold text-gray-900">Enable Auto-Lock</h3>
-								<p className="text-sm text-gray-500 mt-1">Automatically lock the app after inactivity</p>
+								<h3 className="text-base font-semibold text-gray-900">{t('settings.autoLock.enable')}</h3>
+								<p className="text-sm text-gray-500 mt-1">{t('settings.autoLock.subtitle.enable')}</p>
 							</div>
 							<label className="relative inline-flex items-center cursor-pointer">
 								<input
@@ -315,7 +311,7 @@ const Settings = () => {
 						{autoLockForm.watch('enabled') && (
 							<div className="space-y-4">
 								<label className="block text-sm font-semibold text-gray-700">
-									Lock after inactivity
+									{t('settings.autoLock.minutes')}
 								</label>
 								<select
 									{...autoLockForm.register('duration', { valueAsNumber: true })}
@@ -326,13 +322,13 @@ const Settings = () => {
 									<option value={10}>10 minutes</option>
 									<option value={15}>15 minutes</option>
 									<option value={30}>30 minutes</option>
-									<option value={60}>1 hour</option>
+									<option value={60}>1 {t("settings.autoLock.hour")}</option>
 								</select>
 
 								<div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-4">
 									<p className="text-sm text-orange-700 flex items-center">
 										<Shield className="h-4 w-4 mr-2" />
-										App will auto-lock after <strong className="mx-1">{getDurationText(autoLockForm.watch('duration'))}</strong> of inactivity.
+										{t("settings.autoLock.alert")} <strong className="mx-1">{getDurationText(autoLockForm.watch('duration'))}</strong> {t("settings.autoLock.alert2")}
 									</p>
 								</div>
 							</div>
