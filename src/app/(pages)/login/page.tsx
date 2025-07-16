@@ -32,7 +32,7 @@ export default function LoginPage() {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 flex items-center justify-center relative overflow-hidden">
+		<div className="min-h-screen bg-gradient-to-br from-blue-300 via-blue-600 to-blue-900 flex items-center justify-center relative overflow-hidden">
 			{/* Language Switcher - Top Right Corner */}
 			<div className="absolute top-6 right-6 z-30">
 				<button
