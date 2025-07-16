@@ -127,7 +127,7 @@ const Settings = () => {
 								}`}
 						>
 							<div className="flex items-center">
-								<span className="text-2xl mr-4">🇬🇧</span>
+								<img src="/flags/gb.svg" alt="English flag" className="w-7 h-7 mr-4 inline-block align-middle" />
 								<span className="font-semibold">English</span>
 							</div>
 							{language === 'en' && <Check className="h-5 w-5 text-blue-600" />}
@@ -141,7 +141,7 @@ const Settings = () => {
 								}`}
 						>
 							<div className="flex items-center">
-								<span className="text-2xl mr-4">🇫🇷</span>
+								<img src="/flags/fr.svg" alt="French flag" className="w-7 h-7 mr-4 inline-block align-middle" />
 								<span className="font-semibold">Français</span>
 							</div>
 							{language === 'fr' && <Check className="h-5 w-5 text-blue-600" />}
