@@ -91,7 +91,7 @@ const Settings = () => {
 		return `${Math.floor(duration / 60)} hour${Math.floor(duration / 60) > 1 ? 's' : ''}`;
 	};
 	return (
-		<div className="max-w-3xl mx-auto">
+		<div className="max-w-5xl mx-auto">
 			{/* Header */}
 			<div className="flex items-center mb-8">
 				<div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg mr-4">

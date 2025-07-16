@@ -40,8 +40,11 @@ export default function LoginPage() {
 					className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 hover:bg-white text-blue-700 shadow transition"
 					aria-label="Switch language"
 				>
-					<Globe className="h-4 w-4" />
-					<span className="font-medium">{language === 'en' ? 'FR' : 'EN'}</span>
+					{language === 'en' ? (
+						<img src="/flags/fr.svg" alt="French flag" className="w-5 h-5" />
+					) : (
+						<img src="/flags/gb.svg" alt="English flag" className="w-5 h-5" />
+					)}
 				</button>
 			</div>
 			{/* Background Pattern */}
