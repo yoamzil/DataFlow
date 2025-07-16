@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type TranslationKey = keyof typeof translations.en;
 
@@ -235,20 +235,48 @@ export const useLanguage = () => {
 	return context;
 };
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const [language, setLanguage] = useState<'en' | 'fr'>('en');
+export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLanguage?: 'en' | 'fr' }> = ({ children, initialLanguage }) => {
+	const [language, setLanguageState] = useState<'en' | 'fr'>(() => {
+		if (initialLanguage) return initialLanguage;
+		if (typeof window !== 'undefined') {
+			// Client-side: read from cookie
+			const match = document.cookie.match(/(?:^|; )language=([^;]*)/);
+			return (match ? decodeURIComponent(match[1]) : 'en') as 'en' | 'fr';
+		}
+		// Server-side: fallback to 'en' (could be improved for SSR)
+		return 'en';
+	});
+
+	// When language changes, set cookie via server action
+	const setLanguage = async (lang: 'en' | 'fr') => {
+		setLanguageState(lang);
+		// Dynamically import server action to avoid SSR issues
+		if (typeof window !== 'undefined') {
+			const { setLanguageCookie } = await import('@/actions/language');
+			setLanguageCookie(lang);
+			// Also set client cookie for immediate effect
+			document.cookie = `language=${lang}; path=/`;
+		}
+	};
 
 	const t = (key: TranslationKey, params?: Record<string, any>): string => {
 		let text = translations[language][key] || key;
-
 		if (params) {
 			Object.entries(params).forEach(([key, value]) => {
 				text = text.replace(`{${key}}`, value);
 			});
 		}
-
 		return text;
 	};
+
+	// Sync language state with cookie on mount (in case cookie was set elsewhere)
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const match = document.cookie.match(/(?:^|; )language=([^;]*)/);
+			const cookieLang = (match ? decodeURIComponent(match[1]) : 'en') as 'en' | 'fr';
+			if (cookieLang !== language) setLanguageState(cookieLang);
+		}
+	}, []);
 
 	return (
 		<LanguageContext.Provider value={{ language, setLanguage, t }}>

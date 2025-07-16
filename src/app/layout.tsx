@@ -3,6 +3,7 @@ import { LanguageProvider } from '../context/LanguageContext'
 import '../styles/globals.css'
 import LayoutWrapper from '../components/LayoutWrapper'
 import localFont from 'next/font/local'
+import { cookies } from 'next/headers';
 
 const myFont = localFont({
 	src: '../../public/Fonts/Inter-VariableFont_opsz,wght.ttf',
@@ -13,11 +14,13 @@ export const metadata = {
 	description: 'Client management and money calculation system',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+	const cookieStore = await cookies();
+	const lang = (cookieStore.get('language')?.value as 'en' | 'fr') || 'en';
 	return (
-		<html lang="en" className={myFont.className}>
+		<html lang={lang} className={myFont.className}>
 			<body>
-				<LanguageProvider>
+				<LanguageProvider initialLanguage={lang}>
 					<Toaster position="top-right" containerStyle={{ top: 80 }} />
 					<LayoutWrapper>
 						{children}
