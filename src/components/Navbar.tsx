@@ -101,7 +101,7 @@ const Navbar = () => {
 							</button>
 							{/* Dropdown Menu */}
 							{isDropdownOpen && (
-								<div className="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden">
+								<div className="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden">
 									<div className="py-2">
 										{/* Settings */}
 										<div className="px-4 py-2">
@@ -113,8 +113,6 @@ const Navbar = () => {
 												{t('nav.settings')}
 											</button>
 										</div>
-										{/* Divider */}
-										<div className="border-t border-gray-100 my-2"></div>
 										{/* Logout */}
 										<div className="px-4 pb-2">
 											<button
