@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { addClient, updateClient } from '@/actions/clients';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 interface Client {
@@ -148,166 +149,192 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 	};
 
 	return (
-		<div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
-			<div className="bg-white rounded-2xl p-6 w-full max-w-2xl ">
-				<div className="flex justify-between items-center mb-6">
-					<h2 className="text-xl font-bold text-gray-800">
-						{client ? t('form.title.edit') : t('form.title.add')}
-					</h2>
-					<button onClick={onClose} className="text-gray-500 hover:text-gray-700 -mr-2">
-						<X className="h-6 w-6" />
-					</button>
-				</div>
-
-				<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-					{/* Row 1: Name and ID Card */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
-							<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.name')}
-							</label>
-							<input
-								type="text"
-								id="name"
-								{...register('name')}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
-						</div>
-
-						<div>
-							<label htmlFor="idCard" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.id')}
-							</label>
-							<input
-								type="text"
-								id="idCard"
-								{...register('idCard')}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.idCard && <span className="text-red-500 text-xs">{errors.idCard.message as string}</span>}
-						</div>
-					</div>
-
-					{/* Row 2: Phone and Date */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
-							<label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.phone')}
-							</label>
-							<input
-								type="tel"
-								id="phone"
-								{...register('phone')}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.phone && <span className="text-red-500 text-xs">{errors.phone.message as string}</span>}
-						</div>
-
-						<div>
-							<label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.date')}
-							</label>
-							<input
-								type="date"
-								id="date"
-								{...register('date')}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.date && <span className="text-red-500 text-xs">{errors.date.message as string}</span>}
-						</div>
-					</div>
-
-					{/* Row 3: Amount and Duration */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
-							<label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.amount')}
-							</label>
-							<input
-								type="number"
-								id="amount"
-								step="0.01"
-								{...register('amount', { valueAsNumber: true })}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.amount && <span className="text-red-500 text-xs">{errors.amount.message as string}</span>}
-						</div>
-
-						<div>
-							<label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.duration')}
-							</label>
-							<input
-								type="number"
-								id="duration"
-								{...register('duration', { valueAsNumber: true })}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.duration && <span className="text-red-500 text-xs">{errors.duration.message as string}</span>}
-						</div>
-					</div>
-
-					{/* Row 4: File ID and Company */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
-							<label htmlFor="fileId" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.fileId')}
-							</label>
-							<input
-								type="text"
-								id="fileId"
-								{...register('fileId')}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
-							/>
-							{errors.fileId && <span className="text-red-500 text-xs">{errors.fileId.message as string}</span>}
-						</div>
-
-						<div>
-							<label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-								{t('form.labels.company')}
-							</label>
-							<select
-								id="company"
-								{...register('company')}
-								className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+		<AnimatePresence>
+			{isOpen && (
+				<motion.div
+					className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4"
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					transition={{ duration: 0.2 }}
+				>
+					<motion.div
+						className="bg-white rounded-2xl p-6 w-full max-w-2xl"
+						initial={{ opacity: 0, scale: 0.95 }}
+						animate={{ opacity: 1, scale: 1 }}
+						exit={{ opacity: 0, scale: 0.95 }}
+						transition={{ duration: 0.25, ease: 'easeOut' }}
+					>
+						<div className="flex justify-between items-center mb-6">
+							<h2 className="text-xl font-bold text-gray-800">
+								{client ? t('form.title.edit') : t('form.title.add')}
+							</h2>
+							<motion.button
+								onClick={onClose}
+								className="text-gray-500 hover:text-gray-700 -mr-2"
+								whileHover={{ scale: 1.2 }}
+								whileTap={{ scale: 0.95 }}
+								style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
 							>
-								<option value="">{t('form.placeholders.selectCompany')}</option>
-								{companies.map((company) => (
-									<option key={company} value={company}>
-										{company}
-									</option>
-								))}
-							</select>
-							{errors.company && <span className="text-red-500 text-xs">{errors.company.message as string}</span>}
+								<X className="h-6 w-6" />
+							</motion.button>
 						</div>
-					</div>
 
-					<div className="flex justify-end space-x-4 mt-8">
-						<button
-							type="button"
-							onClick={onClose}
-							className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-150"
-							disabled={isLoading}
-						>
-							{t('form.buttons.cancel')}
-						</button>
-						<button
-							type="submit"
-							disabled={isLoading}
-							className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150 flex items-center justify-center"
-						>
-							{isLoading && (
-								<svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
-									<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-									<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-								</svg>
-							)}
-							{client ? t('form.buttons.update') : t('form.buttons.add')}
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
+						<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+							{/* Row 1: Name and ID Card */}
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<div>
+									<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.name')}
+									</label>
+									<input
+										type="text"
+										id="name"
+										{...register('name')}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.name && <span className="text-red-500 text-xs">{errors.name.message as string}</span>}
+								</div>
+
+								<div>
+									<label htmlFor="idCard" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.id')}
+									</label>
+									<input
+										type="text"
+										id="idCard"
+										{...register('idCard')}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.idCard && <span className="text-red-500 text-xs">{errors.idCard.message as string}</span>}
+								</div>
+							</div>
+
+							{/* Row 2: Phone and Date */}
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<div>
+									<label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.phone')}
+									</label>
+									<input
+										type="tel"
+										id="phone"
+										{...register('phone')}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.phone && <span className="text-red-500 text-xs">{errors.phone.message as string}</span>}
+								</div>
+
+								<div>
+									<label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.date')}
+									</label>
+									<input
+										type="date"
+										id="date"
+										{...register('date')}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.date && <span className="text-red-500 text-xs">{errors.date.message as string}</span>}
+								</div>
+							</div>
+
+							{/* Row 3: Amount and Duration */}
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<div>
+									<label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.amount')}
+									</label>
+									<input
+										type="number"
+										id="amount"
+										step="0.01"
+										{...register('amount', { valueAsNumber: true })}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.amount && <span className="text-red-500 text-xs">{errors.amount.message as string}</span>}
+								</div>
+
+								<div>
+									<label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.duration')}
+									</label>
+									<input
+										type="number"
+										id="duration"
+										{...register('duration', { valueAsNumber: true })}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.duration && <span className="text-red-500 text-xs">{errors.duration.message as string}</span>}
+								</div>
+							</div>
+
+							{/* Row 4: File ID and Company */}
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+								<div>
+									<label htmlFor="fileId" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.fileId')}
+									</label>
+									<input
+										type="text"
+										id="fileId"
+										{...register('fileId')}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									/>
+									{errors.fileId && <span className="text-red-500 text-xs">{errors.fileId.message as string}</span>}
+								</div>
+
+								<div>
+									<label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+										{t('form.labels.company')}
+									</label>
+									<select
+										id="company"
+										{...register('company')}
+										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
+									>
+										<option value="">{t('form.placeholders.selectCompany')}</option>
+										{companies.map((company) => (
+											<option key={company} value={company}>
+												{company}
+											</option>
+										))}
+									</select>
+									{errors.company && <span className="text-red-500 text-xs">{errors.company.message as string}</span>}
+								</div>
+							</div>
+
+							<div className="flex justify-end space-x-4 mt-8">
+								<motion.button
+									type="button"
+									onClick={onClose}
+									className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-150"
+									disabled={isLoading}
+									whileHover={{ scale: 1.08 }}
+									whileTap={{ scale: 0.96 }}
+								>
+									{t('form.buttons.cancel')}
+								</motion.button>
+								<motion.button
+									type="submit"
+									disabled={isLoading}
+									className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150 flex items-center justify-center"
+									whileHover={{ scale: 1.08 }}
+									whileTap={{ scale: 0.96 }}
+								>
+									{isLoading && (
+										<svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
+											<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+											<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+										</svg>
+									)}
+									{client ? t('form.buttons.update') : t('form.buttons.add')}
+								</motion.button>
+							</div>
+						</form>
+					</motion.div>
+				</motion.div>
+			)}
+		</AnimatePresence>
 	);
 } 

@@ -10,6 +10,7 @@ import AddClientModal from '../../../components/AddClientModal';
 import toast from 'react-hot-toast';
 import { deleteClient } from '../../../actions/clients';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 interface Client {
 	id?: number;
@@ -130,13 +131,15 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 		<div className="max-w-6xl mx-auto">
 			<div className="flex justify-between items-center mb-6">
 				<h1 className="text-2xl font-bold text-gray-900">{t('clients.title')}</h1>
-				<button
+				<motion.button
 					onClick={() => setIsAddModalOpen(true)}
-					className="px-4 py-2 bg-blue-600 text-white rounded-md flex items-center hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+					className=" cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md flex items-center hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+					whileHover={{ scale: 1.04 }}
+					whileTap={{ scale: 0.96 }}
 				>
 					<Plus className="h-4 w-4 mr-2" />
 					{t('clients.add')}
-				</button>
+				</motion.button>
 			</div>
 
 			<div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
