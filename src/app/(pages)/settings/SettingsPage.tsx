@@ -162,117 +162,124 @@ const SettingsPage = () => {
 						</div>
 					</div>
 
-					<form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="p-8 space-y-6">
-						{/* Current Password */}
-						<div>
-							<label className="block text-sm font-semibold text-gray-700 mb-3">
-								{t("settings.currentPassword")}
-							</label>
-							<div className="relative">
-								<input
-									type={showCurrentPassword ? 'text' : 'password'}
-									{...passwordForm.register('currentPassword')}
-									className={`text-gray-700 w-full px-4 py-4 pr-12 border-2 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 text-sm ${passwordForm.formState.errors.currentPassword
-										? 'border-red-300 bg-red-50'
-										: 'border-gray-200 bg-gray-50 focus:bg-white hover:border-gray-300'
-										}`}
-									placeholder={t("settings.currentPassword.subtitle")}
-								/>
-								<button
-									type="button"
-									onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-									className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-								>
-									{showCurrentPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-								</button>
-							</div>
-							{passwordForm.formState.errors.currentPassword && (
-								<p className="mt-2 text-sm text-red-600 flex items-center">
-									<AlertCircle className="h-4 w-4 mr-1" />
-									{passwordForm.formState.errors.currentPassword.message}
-								</p>
-							)}
-						</div>
+					<form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="p-8">
 
-						{/* New Password */}
-						<div>
-							<label className="block text-sm font-semibold text-gray-700 mb-3">
-								{t("settings.newPassword")}
-							</label>
-							<div className="relative">
-								<input
-									type={showNewPassword ? 'text' : 'password'}
-									{...passwordForm.register('newPassword')}
-									className={`text-gray-700 w-full px-4 py-4 pr-12 border-2 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 text-sm ${passwordForm.formState.errors.newPassword
-										? 'border-red-300 bg-red-50'
-										: 'border-gray-200 bg-gray-50 focus:bg-white hover:border-gray-300'
-										}`}
-									placeholder={t('settings.newPassword.subtitle')}
-								/>
-								<button
-									type="button"
-									onClick={() => setShowNewPassword(!showNewPassword)}
-									className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-								>
-									{showNewPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-								</button>
-							</div>
-							{passwordForm.formState.errors.newPassword && (
-								<p className="mt-2 text-sm text-red-600 flex items-center">
-									<AlertCircle className="h-4 w-4 mr-1" />
-									{passwordForm.formState.errors.newPassword.message}
-								</p>
-							)}
-						</div>
-
-						{/* Confirm Password */}
-						<div>
-							<label className="block text-sm font-semibold text-gray-700 mb-3">
-								{t("settings.confirmPassword")}
-							</label>
-							<div className="relative">
-								<input
-									type={showConfirmPassword ? 'text' : 'password'}
-									{...passwordForm.register('confirmPassword')}
-									className={`text-gray-700 w-full px-4 py-4 pr-12 border-2 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 text-sm ${passwordForm.formState.errors.confirmPassword
-										? 'border-red-300 bg-red-50'
-										: 'border-gray-200 bg-gray-50 focus:bg-white hover:border-gray-300'
-										}`}
-									placeholder={t("settings.confirmPassword.subtitle")}
-								/>
-								<button
-									type="button"
-									onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-									className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-								>
-									{showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-								</button>
-							</div>
-							{passwordForm.formState.errors.confirmPassword && (
-								<p className="mt-2 text-sm text-red-600 flex items-center">
-									<AlertCircle className="h-4 w-4 mr-1" />
-									{passwordForm.formState.errors.confirmPassword.message}
-								</p>
-							)}
-						</div>
-
-						<button
-							type="submit"
-							disabled={passwordForm.formState.isSubmitting}
-							className="w-full flex items-center justify-center px-6 py-4 bg-red-600 text-white rounded-2xl hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
-						>
-							{passwordForm.formState.isSubmitting ? (
-								<div className="flex items-center">
-									<div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-									{t("settings.updating")}
+						{/* Password Fields Grid */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+							{/* Current Password */}
+							<div className="md:col-span-2">
+								<label className="block text-sm font-medium text-gray-700 mb-2">
+									{t("settings.currentPassword")}
+								</label>
+								<div className="relative group">
+									<input
+										type={showCurrentPassword ? 'text' : 'password'}
+										{...passwordForm.register('currentPassword')}
+										className={`text-gray-700 w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 text-sm bg-white ${passwordForm.formState.errors.currentPassword
+											? 'border-red-300 ring-2 ring-red-200'
+											: 'border-gray-200 group-hover:border-gray-300'
+											}`}
+										placeholder={t("settings.currentPassword.subtitle")}
+									/>
+									<button
+										type="button"
+										onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+										className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+									>
+										{showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+									</button>
 								</div>
-							) : (
-								<div className="flex items-center">
-									<Save className="h-5 w-5 mr-2" />
-									{t("settings.updatepassword")}
+								{passwordForm.formState.errors.currentPassword && (
+									<p className="mt-2 text-sm text-red-600 flex items-center">
+										<AlertCircle className="h-4 w-4 mr-1" />
+										{passwordForm.formState.errors.currentPassword.message}
+									</p>
+								)}
+							</div>
+
+							{/* New Password */}
+							<div>
+								<label className="block text-sm font-medium text-gray-700 mb-2">
+									{t("settings.newPassword")}
+								</label>
+								<div className="relative group">
+									<input
+										type={showNewPassword ? 'text' : 'password'}
+										{...passwordForm.register('newPassword')}
+										className={`text-gray-700 w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 text-sm bg-white ${passwordForm.formState.errors.newPassword
+											? 'border-red-300 ring-2 ring-red-200'
+											: 'border-gray-200 group-hover:border-gray-300'
+											}`}
+										placeholder={t('settings.newPassword.subtitle')}
+									/>
+									<button
+										type="button"
+										onClick={() => setShowNewPassword(!showNewPassword)}
+										className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+									>
+										{showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+									</button>
 								</div>
-							)}
-						</button>
+								{passwordForm.formState.errors.newPassword && (
+									<p className="mt-2 text-sm text-red-600 flex items-center">
+										<AlertCircle className="h-4 w-4 mr-1" />
+										{passwordForm.formState.errors.newPassword.message}
+									</p>
+								)}
+							</div>
+
+							{/* Confirm Password */}
+							<div>
+								<label className="block text-sm font-medium text-gray-700 mb-2">
+									{t("settings.confirmPassword")}
+								</label>
+								<div className="relative group">
+									<input
+										type={showConfirmPassword ? 'text' : 'password'}
+										{...passwordForm.register('confirmPassword')}
+										className={`text-gray-700 w-full px-4 py-3 pr-12 border rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 text-sm bg-white ${passwordForm.formState.errors.confirmPassword
+											? 'border-red-300 ring-2 ring-red-200'
+											: 'border-gray-200 group-hover:border-gray-300'
+											}`}
+										placeholder={t("settings.confirmPassword.subtitle")}
+									/>
+									<button
+										type="button"
+										onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+										className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+									>
+										{showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+									</button>
+								</div>
+								{passwordForm.formState.errors.confirmPassword && (
+									<p className="mt-2 text-sm text-red-600 flex items-center">
+										<AlertCircle className="h-4 w-4 mr-1" />
+										{passwordForm.formState.errors.confirmPassword.message}
+									</p>
+								)}
+							</div>
+						</div>
+
+						{/* Submit Button */}
+						<div className="flex justify-end">
+							<button
+								type="submit"
+								disabled={passwordForm.formState.isSubmitting}
+								className="flex items-center justify-center px-8 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
+							>
+								{passwordForm.formState.isSubmitting ? (
+									<div className="flex items-center">
+										<div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+										{t("settings.updating")}
+									</div>
+								) : (
+									<div className="flex items-center">
+										<Save className="h-4 w-4 mr-2" />
+										{t("settings.updatepassword")}
+									</div>
+								)}
+							</button>
+						</div>
 					</form>
 				</div>
 
