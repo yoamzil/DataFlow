@@ -59,7 +59,7 @@ export default function LoginPage() {
 			</div>
 
 			{/* Login Card */}
-			<div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-full max-w-md border border-white/20 z-10">
+			<div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-20 md:w-full max-w-md border border-white/20 z-10">
 				{/* User Avatar */}
 				<div className="flex flex-col items-center mb-8">
 					<div className="relative mb-4">
