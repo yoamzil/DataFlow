@@ -21,15 +21,25 @@ export default function LoginPage() {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setIsLoading(true);
-		const isAuthenticated = await login(password);
-		if (isAuthenticated) {
-			router.push('/');
-		}
-		else {
+		setError('');
+
+		try {
+			const isAuthenticated = await login(password);
+
+			if (isAuthenticated) {
+				router.push('/');
+			} else {
+				setError('Incorrect password');
+				setPassword('');
+				setIsLoading(false);
+			}
+		} catch (err) {
+			console.error('Login failed:', err);
+			setError('Something went wrong. Please try again.');
 			setIsLoading(false);
-			setError('Incorrect password');
 		}
 	};
+
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-300 via-blue-600 to-blue-900 flex items-center justify-center relative overflow-hidden">
