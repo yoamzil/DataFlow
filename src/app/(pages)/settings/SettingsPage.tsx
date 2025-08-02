@@ -346,7 +346,7 @@ const SettingsPage = () => {
 							className="w-full flex items-center justify-center px-6 py-4 bg-orange-600 text-white rounded-2xl hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-30 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
 						>
 							<Save className="h-5 w-5 mr-2" />
-							Save Auto-Lock Settings
+							{t('settings.autoLock.save')}
 						</button>
 					</form>
 				</div>

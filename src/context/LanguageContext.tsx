@@ -116,6 +116,7 @@ const translations = {
 		'settings.autoLock.hours': 'Hours',
 		'settings.autoLock.alert': 'App will lock after',
 		'settings.autoLock.alert2': 'of inactivity',
+		'settings.autoLock.save': 'Save Auto-Lock Settings',
 	},
 	fr: {
 		'login.admin': 'Administrateur',
@@ -222,6 +223,7 @@ const translations = {
 		'settings.autoLock.hours': 'Heures',
 		'settings.autoLock.alert': 'L\'application se verrouillera après',
 		'settings.autoLock.alert2': 'd\'inactivité',
+		'settings.autoLock.save': 'Enregistrer les paramètres de verrouillage automatique',
 	},
 };
 
