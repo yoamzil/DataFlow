@@ -7,7 +7,7 @@ type TranslationKey = keyof typeof translations.en;
 interface LanguageContextType {
 	language: 'en' | 'fr';
 	setLanguage: (lang: 'en' | 'fr') => void;
-	t: (key: TranslationKey, params?: Record<string, any>) => string;
+	t: (key: TranslationKey, params?: Record<string, unknown>) => string;
 }
 
 const translations = {
@@ -16,6 +16,7 @@ const translations = {
 		'login.welcome': 'Welcome back',
 		'login.password': 'Password',
 		'login.enterPassword': 'Enter your password',
+		'login.error': 'Incorrect password',
 		'login.submit': 'Sign In',
 		'login.version': 'DataFlow Client Management',
 		'nav.dashboard': 'Dashboard',
@@ -123,6 +124,7 @@ const translations = {
 		'login.welcome': 'Bienvenue',
 		'login.password': 'Mot de passe',
 		'login.enterPassword': 'Entrez votre mot de passe',
+		'login.error': 'Mot de passe incorrect',
 		'login.submit': 'Se connecter',
 		'login.version': 'DataFlow Gestion Client',
 		'nav.dashboard': 'Tableau de bord',
@@ -261,11 +263,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLang
 		}
 	};
 
-	const t = (key: TranslationKey, params?: Record<string, any>): string => {
+	const t = (key: TranslationKey, params?: Record<string, unknown>): string => {
 		let text = translations[language][key] || key;
 		if (params) {
 			Object.entries(params).forEach(([key, value]) => {
-				text = text.replace(`{${key}}`, value);
+				text = text.replace(`{${key}}`, String(value));
 			});
 		}
 		return text;
@@ -278,7 +280,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLang
 			const cookieLang = (match ? decodeURIComponent(match[1]) : 'en') as 'en' | 'fr';
 			if (cookieLang !== language) setLanguageState(cookieLang);
 		}
-	}, []);
+	}, [language]);
 
 	return (
 		<LanguageContext.Provider value={{ language, setLanguage, t }}>

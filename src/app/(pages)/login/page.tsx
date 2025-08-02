@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Eye, EyeOff, ArrowRight, Globe, Loader2 } from 'lucide-react';
+import { User, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
@@ -29,7 +29,7 @@ export default function LoginPage() {
 			if (isAuthenticated) {
 				router.push('/');
 			} else {
-				setError('Incorrect password');
+				setError(t('login.error'));
 				setPassword('');
 				setIsLoading(false);
 			}
