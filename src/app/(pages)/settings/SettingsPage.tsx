@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
+import { changePassword } from '@/actions/password';
 
 const SettingsPage = () => {
 	const { language, setLanguage, t } = useLanguage();
@@ -56,20 +57,23 @@ const SettingsPage = () => {
 
 	const onPasswordSubmit = async (data: PasswordFormData) => {
 		try {
-			// Simulate password change API call
-			await new Promise(resolve => setTimeout(resolve, 1000));
+			const result = await changePassword(data.currentPassword, data.newPassword);
 
-			// In real app, verify current password and update
-			if (data.currentPassword !== 'admin123') {
-				passwordForm.setError('currentPassword', {
-					message: 'Current password is incorrect'
-				});
-				return;
+			if (result.success) {
+				toast.success(t('settings.passwordUpdated'));
+				passwordForm.reset();
+			} else {
+				// Handle specific error for current password
+				if (result.error?.includes('Current password is incorrect')) {
+					passwordForm.setError('currentPassword', {
+						message: t('settings.passwordError')
+					});
+				} else {
+					// Handle other errors
+					toast.error(result.error || t('settings.error'));
+				}
 			}
-
-			toast.success(t('settings.passwordUpdated'));
-			passwordForm.reset();
-		} catch (error) {
+		} catch {
 			toast.error(t('settings.error'));
 		}
 	};
