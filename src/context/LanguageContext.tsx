@@ -280,7 +280,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLang
 			const cookieLang = (match ? decodeURIComponent(match[1]) : 'en') as 'en' | 'fr';
 			if (cookieLang !== language) setLanguageState(cookieLang);
 		}
-	}, [language]);
+	}, []);
 
 	return (
 		<LanguageContext.Provider value={{ language, setLanguage, t }}>
