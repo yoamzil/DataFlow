@@ -308,7 +308,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 								<motion.button
 									type="button"
 									onClick={onClose}
-									className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-150"
+									className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-150 cursor-pointer"
 									disabled={isLoading}
 									whileHover={{ scale: 1.08 }}
 									whileTap={{ scale: 0.96 }}
@@ -318,7 +318,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 								<motion.button
 									type="submit"
 									disabled={isLoading}
-									className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150 flex items-center justify-center"
+									className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 transition-colors duration-150 flex items-center justify-center cursor-pointer"
 									whileHover={{ scale: 1.08 }}
 									whileTap={{ scale: 0.96 }}
 								>
