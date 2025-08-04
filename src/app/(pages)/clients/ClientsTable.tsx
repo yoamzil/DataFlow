@@ -42,6 +42,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 	const [editingClient, setEditingClient] = useState<Client | null>(null);
 	const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'date', direction: 'desc' });
 	const [currentPage, setCurrentPage] = useState(1);
+	const [deleteId, setDeleteId] = useState<number | null>(null);
 
 	useEffect(() => {
 		let results = [...initialClients];
@@ -92,16 +93,20 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 			toast.error(t('form.errors.deleteFailed'));
 			return;
 		}
-		if (window.confirm(t('clients.confirmDelete'))) {
-			try {
-				await deleteClient(id);
-				router.refresh();
-				toast.success(t('form.success.deleted'));
-			} catch (error) {
-				console.error('Error deleting client:', error);
-				toast.error(t('form.errors.deleteFailed'));
-			}
+		setDeleteId(id);
+	}
+	const confirmDelete = async () => {
+		if (!deleteId) return;
+
+		try {
+			await deleteClient(deleteId);
+			router.refresh();
+			toast.success(t('form.success.deleted'));
+		} catch (error) {
+			console.error('Error deleting client:', error);
+			toast.error(t('form.errors.deleteFailed'));
 		}
+		setDeleteId(null);
 	};
 
 	const handleEdit = (client: Client) => {
@@ -359,6 +364,28 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 					</div>
 				</div>
 			</div>
+
+			{deleteId && (
+                <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-lg max-w-sm w-full mx-4">
+                        <h3 className="text-lg font-medium mb-4 text-gray-700">{t('clients.confirmDelete')}</h3>
+                        <div className="flex justify-end space-x-3">
+                            <button
+                                onClick={() => setDeleteId(null)}
+                                className="px-4 py-2 text-gray-600 border rounded hover:bg-gray-50"
+                            >
+                                {t('form.buttons.cancel')}
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                            >
+                                {t('form.buttons.delete')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
 			{isAddModalOpen && (
 				<AddClientModal
