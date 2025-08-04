@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
 import { changePassword } from '@/actions/password';
+import Image from 'next/image';
 
 const SettingsPage = () => {
 	const { language, setLanguage, t } = useLanguage();
@@ -130,7 +131,7 @@ const SettingsPage = () => {
 								}`}
 						>
 							<div className="flex items-center">
-								<img src="/flags/gb.svg" alt="English flag" className="w-7 h-7 mr-4 inline-block align-middle" />
+								<Image src="/flags/gb.svg" alt="English flag" width={28} height={28} className="mr-4 inline-block align-middle" />
 								<span className="font-semibold">{t("settings.language.en")}</span>
 							</div>
 							{language === 'en' && <Check className="h-5 w-5 text-blue-600" />}
@@ -144,7 +145,7 @@ const SettingsPage = () => {
 								}`}
 						>
 							<div className="flex items-center">
-								<img src="/flags/fr.svg" alt="French flag" className="w-7 h-7 mr-4 inline-block align-middle" />
+								<Image src="/flags/fr.svg" alt="French flag" width={28} height={28} className="mr-4 inline-block align-middle" />
 								<span className="font-semibold">{t("settings.language.fr")}</span>
 							</div>
 							{language === 'fr' && <Check className="h-5 w-5 text-blue-600" />}

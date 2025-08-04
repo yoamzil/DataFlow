@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { login } from '@/actions/auth';
+import Image from 'next/image';
 
 export default function LoginPage() {
 	const [password, setPassword] = useState('');
@@ -51,9 +52,9 @@ export default function LoginPage() {
 					aria-label="Switch language"
 				>
 					{language === 'en' ? (
-						<img src="/flags/fr.svg" alt="French flag" className="w-5 h-5" />
+						<Image src="/flags/fr.svg" alt="French flag" width={20} height={20} />
 					) : (
-						<img src="/flags/gb.svg" alt="English flag" className="w-5 h-5" />
+						<Image src="/flags/gb.svg" alt="English flag" width={20} height={20} />
 					)}
 				</button>
 			</div>
