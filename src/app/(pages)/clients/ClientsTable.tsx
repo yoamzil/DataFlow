@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
 	Search, Plus, Filter, Edit, Trash2, ChevronDown,
 	ChevronUp, FileSpreadsheet, ChevronLeft, ChevronRight
@@ -35,7 +35,6 @@ const ITEMS_PER_PAGE = 8;
 export default function ClientsTable({ initialClients }: { initialClients: Client[] }) {
 	const { t } = useLanguage();
 	const router = useRouter();
-	const [filteredClients, setFilteredClients] = useState<Client[]>(initialClients);
 	const [searchQuery, setSearchQuery] = useState('');
 	const [selectedCompany, setSelectedCompany] = useState('');
 	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -44,7 +43,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 	const [currentPage, setCurrentPage] = useState(1);
 	const [deleteId, setDeleteId] = useState<number | null>(null);
 
-	useEffect(() => {
+	const filteredClients = useMemo(() => {
 		let results = [...initialClients];
 
 		if (selectedCompany) {
@@ -76,9 +75,12 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 			});
 		}
 
-		setFilteredClients(results);
-		setCurrentPage(1);
+		return results;
 	}, [initialClients, selectedCompany, searchQuery, sortConfig]);
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [filteredClients]);
 
 	const handleSort = (key: keyof Client) => {
 		let direction: 'asc' | 'desc' = 'asc';
@@ -366,26 +368,26 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 			</div>
 
 			{deleteId && (
-                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded-lg max-w-sm w-full mx-4">
-                        <h3 className="text-lg font-medium mb-4 text-gray-700">{t('clients.confirmDelete')}</h3>
-                        <div className="flex justify-end space-x-3">
-                            <button
-                                onClick={() => setDeleteId(null)}
-                                className="px-4 py-2 text-gray-600 border rounded hover:bg-gray-50"
-                            >
-                                {t('form.buttons.cancel')}
-                            </button>
-                            <button
-                                onClick={confirmDelete}
-                                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                            >
-                                {t('form.buttons.delete')}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+				<div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+					<div className="bg-white p-6 rounded-lg max-w-sm w-full mx-4">
+						<h3 className="text-lg font-medium mb-4 text-gray-700">{t('clients.confirmDelete')}</h3>
+						<div className="flex justify-end space-x-3">
+							<button
+								onClick={() => setDeleteId(null)}
+								className="px-4 py-2 text-gray-600 border rounded hover:bg-gray-50"
+							>
+								{t('form.buttons.cancel')}
+							</button>
+							<button
+								onClick={confirmDelete}
+								className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+							>
+								{t('form.buttons.delete')}
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 
 			{isAddModalOpen && (
 				<AddClientModal
