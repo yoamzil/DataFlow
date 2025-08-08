@@ -7,8 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'react-hot-toast';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { changePassword } from '@/actions/password';
+import { updateAutoLockSettings, getAutoLockSettings } from '@/actions/autolock';
 import Image from 'next/image';
 
 const SettingsPage = () => {
@@ -20,6 +21,20 @@ const SettingsPage = () => {
 		enabled: false,
 		duration: 10
 	});
+
+	useEffect(() => {
+		const loadSettings = async () => {
+			try {
+				const settings = await getAutoLockSettings();
+				setAutoLockSettings(settings);
+				autoLockForm.reset(settings);
+			} catch (error) {
+				console.error('Failed to load auto-lock settings:', error);
+			}
+		};
+
+		loadSettings();
+	}, []);
 
 	// Validation schemas
 	const passwordSchema = z.object({
@@ -79,9 +94,15 @@ const SettingsPage = () => {
 		}
 	};
 
-	const onAutoLockSubmit = (data: AutoLockFormData) => {
-		setAutoLockSettings(data);
-		toast.success(t('settings.autoLock.toast'));
+	const onAutoLockSubmit = async (data: AutoLockFormData) => {
+		try {
+			await updateAutoLockSettings(data);
+			setAutoLockSettings(data);
+			toast.success(t('settings.autoLock.toast'));
+		} catch (error) {
+			console.error('Failed to update auto-lock settings:', error);
+			toast.error('Failed to update auto-lock settings');
+		}
 	};
 
 	const handleLanguageChange = (newLanguage: 'en' | 'fr') => {

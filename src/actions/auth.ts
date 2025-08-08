@@ -23,13 +23,30 @@ export async function login(password: string): Promise<boolean> {
 		data: { sessionToken },
 	});
 
-	// Store in secure cookie
+	// Get auto-lock settings to determine session duration
 	const cookieStore = await cookies();
+	const autoLockSettings = cookieStore.get("autoLockSettings")?.value;
+
+	// Default to 24 hours, but use auto-lock duration if enabled
+	let maxAge = 24 * 60 * 60; // 24 hours in seconds
+
+	if (autoLockSettings) {
+		try {
+			const settings = JSON.parse(autoLockSettings);
+			if (settings.enabled && settings.duration) {
+				maxAge = settings.duration * 60; // Convert minutes to seconds
+			}
+		} catch (error) {
+			console.error("Failed to parse auto-lock settings:", error);
+		}
+	}
+
+	// Store in secure cookie
 	cookieStore.set("sessionToken", sessionToken, {
 		httpOnly: true,
 		sameSite: "strict",
 		path: "/",
-		maxAge: 24 * 60 * 60, // 24 hours in seconds
+		maxAge: maxAge, // 24 hours in seconds
 	});
 
 	return true;
