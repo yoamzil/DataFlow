@@ -2,6 +2,7 @@
 "use server";
 import { PrismaClient } from "@prisma/client";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -22,4 +23,6 @@ export async function logout() {
 		sameSite: "strict",
 		maxAge: 0,
 	});
+
+	redirect("/login");
 }

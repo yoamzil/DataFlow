@@ -36,7 +36,6 @@ const Navbar = () => {
 
 	const handleLogout = async () => {
 		await logout();
-		router.push('/login');
 		setIsDropdownOpen(false);
 	};
 
