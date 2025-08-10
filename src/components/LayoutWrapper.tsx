@@ -25,6 +25,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 			if (saved) settings = JSON.parse(saved);
 		} catch (e) {
 			// If localStorage fails, use defaults
+			console.error('Failed to load auto-lock settings:', e);
 		}
 
 		// 3. EARLY EXIT: Don't run if auto-lock is disabled
