@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'react-hot-toast';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { changePassword } from '@/actions/password';
 import Image from 'next/image';
 
@@ -79,8 +79,37 @@ const SettingsPage = () => {
 		}
 	};
 
+	useEffect(() => {
+		// Load auto-lock settings from localStorage on component mount
+		try {
+			const saved = localStorage.getItem('autoLockSettings');
+			if (saved) {
+				const settings = JSON.parse(saved);
+				setAutoLockSettings(settings);
+				autoLockForm.reset(settings); // Update the form with loaded settings
+			}
+		} catch (error) {
+			console.error('Failed to load auto-lock settings:', error);
+		}
+	}, [autoLockForm]);
+
 	const onAutoLockSubmit = (data: AutoLockFormData) => {
+		// Update React state
 		setAutoLockSettings(data);
+
+		// Save to localStorage (this connects to LayoutWrapper!)
+		try {
+			localStorage.setItem('autoLockSettings', JSON.stringify(data));
+
+			// Dispatch custom event to notify LayoutWrapper
+			window.dispatchEvent(new CustomEvent('autoLockSettingsChanged'));
+
+		} catch (error) {
+			console.error('Failed to save auto-lock settings:', error);
+			toast.error('Failed to save settings');
+			return;
+		}
+
 		toast.success(t('settings.autoLock.toast'));
 	};
 
