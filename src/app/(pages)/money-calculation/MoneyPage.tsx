@@ -2,29 +2,24 @@
 
 import React from 'react';
 import { Calculator, DollarSign, RefreshCw, Plus, Minus, TrendingUp, TrendingDown } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const MoneyCalculation = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Money Calculation</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{t('nav.money')}</h1>
         <button
         //   onClick={resetForm}
           className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg flex items-center hover:bg-gray-200 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
         >
           <RefreshCw className="h-4 w-4 mr-2" />
-          Reset Calculator
+          {t('money.reset')}
         </button>
       </div>
-
-      {/* Reset Button */}
-		{/* <div className="flex justify-end">
-			<button className="px-6 py-3 bg-white text-gray-700 rounded-2xl flex items-center hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-gray-200 shadow-lg border border-gray-200">
-			<RefreshCw className="h-4 w-4 mr-2" />
-			Reset Calculator
-			</button>
-		</div> */}
 
       {/* Main Layout - Two Columns */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-8">
@@ -34,10 +29,10 @@ const MoneyCalculation = () => {
             <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
               <div className="flex items-center justify-center">
                 <Calculator className="h-6 w-6 text-blue-600 mr-3" />
-                <h2 className="text-xl font-semibold text-gray-900">Cash Counter</h2>
+							  <h2 className="text-xl font-semibold text-gray-900">{t('money.cash')}</h2>
               </div>
               <p className="text-center text-gray-600 text-sm mt-2">
-                Enter the quantity of each denomination to calculate the total amount.
+                {t('money.cash.subtitle')}
               </p>
             </div>
             
@@ -205,8 +200,8 @@ const MoneyCalculation = () => {
                       <DollarSign className="h-8 w-8" />
                     </div>
                     <div>
-                      <span className="text-2xl font-bold">Total Cash Amount</span>
-                      <p className="text-emerald-100 text-sm mt-1">Sum of all denominations</p>
+                      <span className="text-2xl font-bold">{t('money.total')}</span>
+                      <p className="text-emerald-100 text-sm mt-1">{t('money.total.subtitle')}</p>
                     </div>
                   </div>
                   <div className="text-4xl font-black">
@@ -224,10 +219,10 @@ const MoneyCalculation = () => {
             <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-red-50 to-pink-50">
               <div className="flex items-center justify-center">
                 <TrendingDown className="h-6 w-6 text-red-600 mr-3" />
-                <h2 className="text-xl font-semibold text-gray-900">Debt Tracker</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('money.debt')}</h2>
               </div>
               <p className="text-center text-gray-600 text-sm mt-2">
-                Keep track of your current debt balance.
+                {t('money.debt.subtitle')}
               </p>
             </div>
             
@@ -238,18 +233,18 @@ const MoneyCalculation = () => {
                   <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-2 backdrop-blur-sm">
                     <TrendingUp className="h-5 w-5" />
                   </div>
-                  <span className="text-lg font-bold">Current Debt</span>
+                  <span className="text-lg font-bold">{t('money.current.debt')}</span>
                 </div>
                 <div className="text-3xl font-black">
                   0.00 DH
                 </div>
-                <p className="text-sm mt-2 opacity-90 font-medium">Debt Free! 🎉</p>
+                <p className="text-sm mt-2 opacity-90 font-medium">{t('money.debt.free')} 🎉</p>
               </div>
 
               {/* Debt Input */}
               <div>
                 <label htmlFor="debtInput" className="block text-sm font-bold text-gray-700 mb-3">
-                  Amount
+                  {t('money.amount')}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -270,12 +265,12 @@ const MoneyCalculation = () => {
               <div className="space-y-4">
                 <button className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-red-600 to-pink-600 text-white rounded-2xl hover:from-red-700 hover:to-pink-700 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-bold shadow-xl hover:shadow-2xl transform hover:scale-[1.02]">
                   <Plus className="h-5 w-5 mr-2" />
-                  Add Debt
+                  {t('money.add.debt')}
                 </button>
                 
                 <button className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-bold shadow-xl hover:shadow-2xl transform hover:scale-[1.02]">
                   <Minus className="h-5 w-5 mr-2" />
-                  Pay Debt
+                  {t('money.pay.debt')}
                 </button>
               </div>
             </div>
