@@ -1,9 +1,7 @@
-import React from 'react'
+import { requireAuth } from "@/lib/requireAuth";
+import MoneyCalculation from "./MoneyPage";
 
-const page = () => {
-  return (
-	<div>page</div>
-  )
+export default async function Settings() {
+	await requireAuth();
+	return <MoneyCalculation />;
 }
-
-export default page
