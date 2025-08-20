@@ -55,7 +55,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -74,7 +74,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -93,7 +93,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -112,7 +112,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -131,7 +131,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -150,7 +150,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -169,7 +169,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -188,7 +188,7 @@ const MoneyCalculation = () => {
                       type="number"
                       min="0"
                       defaultValue="0"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-center text-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 bg-white text-gray-500"
                     />
                     <div className="mt-3 text-base font-bold text-emerald-600">
                       0.00 DH
@@ -253,7 +253,7 @@ const MoneyCalculation = () => {
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 text-sm font-semibold">DH</span>
+                    <span className="text-gray-600 text-sm font-semibold">DH</span>
                   </div>
                   <input
                     id="debtInput"
@@ -261,7 +261,7 @@ const MoneyCalculation = () => {
                     min="0"
                     step="0.01"
                     placeholder="0.00"
-                    className="w-full pl-10 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 text-base font-semibold bg-gray-50 focus:bg-white shadow-inner"
+                    className="w-full pl-10 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-30 focus:border-blue-500 transition-all duration-200 text-base font-semibold bg-gray-50 focus:bg-white shadow-inner text-gray-600"
                   />
                 </div>
               </div>
