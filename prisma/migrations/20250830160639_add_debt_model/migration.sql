@@ -1,0 +1,5 @@
+-- CreateTable
+CREATE TABLE "Debt" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "amount" REAL NOT NULL DEFAULT 0
+);
