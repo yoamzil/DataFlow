@@ -62,38 +62,12 @@ export default function HomeContent() {
 					</div>
 					<h3 className="text-lg font-semibold text-gray-900 mb-2">{t('database.title')}</h3>
 					<p className="text-gray-600 mb-4">{t('database.subtitle')}</p>
-					<div className="flex items-center text-purple-600">
+					<div className="flex items-center text-purple-600 pt-5">
 						<div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
 						<span className="font-medium">{t('database.connected')}</span>
 					</div>
 				</div>
 			</div>
-			{/* <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-				<div className="p-6">
-					<h2 className="text-xl font-semibold text-gray-900 mb-4">{t('quickTips.title')}</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div className="flex items-start space-x-4">
-							<div className="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-lg flex items-center justify-center">
-								<Users className="h-4 w-4 text-blue-600" />
-							</div>
-							<div>
-								<h3 className="font-medium text-gray-900">{t('clients.title')}</h3>
-								<p className="mt-1 text-sm text-gray-500">{t('quickTips.clients')}</p>
-							</div>
-						</div>
-
-						<div className="flex items-start space-x-4">
-							<div className="flex-shrink-0 h-8 w-8 bg-green-100 rounded-lg flex items-center justify-center">
-								<Calculator className="h-4 w-4 text-green-600" />
-							</div>
-							<div>
-								<h3 className="font-medium text-gray-900">{t('money.title')}</h3>
-								<p className="mt-1 text-sm text-gray-500">{t('quickTips.money')}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> */}
 		</div>
 	)
 } 
