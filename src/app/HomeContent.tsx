@@ -62,7 +62,7 @@ export default function HomeContent() {
 					</div>
 					<h3 className="text-lg font-semibold text-gray-900 mb-2">{t('database.title')}</h3>
 					<p className="text-gray-600 mb-4">{t('database.subtitle')}</p>
-					<div className="flex items-center text-purple-600 pt-5">
+					<div className="flex items-center text-purple-600">
 						<div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
 						<span className="font-medium">{t('database.connected')}</span>
 					</div>
