@@ -27,7 +27,7 @@ export async function updateDebt(
 ): Promise<{ success: boolean; error?: string }> {
 	try {
 		// Find the first (and only) debt record
-		let debtRecord = await prisma.debt.findFirst();
+		const debtRecord = await prisma.debt.findFirst();
 
 		if (debtRecord) {
 			// Update existing record
