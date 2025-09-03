@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react' // Add useState
 import { logout } from '@/actions/logout'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { p } from 'framer-motion/client'
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname()
@@ -88,6 +89,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 			window.removeEventListener('autoLockSettingsChanged', handleStorageChange);
 		};
 	}, []);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
 	// 8. RENDER: Normal layout rendering
 	return (

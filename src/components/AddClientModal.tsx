@@ -190,6 +190,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="text"
 										id="name"
+										autoComplete='off'
 										{...register('name')}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 									/>
@@ -203,6 +204,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="text"
 										id="idCard"
+										autoComplete='off'
 										{...register('idCard')}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 									/>
@@ -219,6 +221,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="tel"
 										id="phone"
+										autoComplete='off'
 										{...register('phone')}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 									/>
@@ -232,6 +235,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="date"
 										id="date"
+										autoComplete='off'
 										{...register('date')}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 									/>
@@ -248,6 +252,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="number"
 										id="amount"
+										autoComplete='off'
 										step="0.01"
 										{...register('amount', { valueAsNumber: true })}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
@@ -262,6 +267,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="number"
 										id="duration"
+										autoComplete='off'
 										{...register('duration', { valueAsNumber: true })}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 									/>
@@ -278,6 +284,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 									<input
 										type="text"
 										id="fileId"
+										autoComplete='off'
 										{...register('fileId')}
 										className="block w-full px-3 py-2.5 text-base rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-gray-700"
 									/>
