@@ -70,7 +70,7 @@ export default function LoginPage() {
 			</div>
 
 			{/* Login Card */}
-			<div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-20 md:w-full max-w-md border border-white/20 z-10">
+			<div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-8 m-8 w-full max-w-md border border-white/20 z-10">
 				{/* User Avatar */}
 				<div className="flex flex-col items-center mb-8">
 					<div className="relative mb-4">
@@ -144,7 +144,7 @@ export default function LoginPage() {
 			</div>
 
 			{/* Footer */}
-			<div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
+			<div className="absolute bottom-6 left-0 w-full flex justify-center z-20">
 				<p className="text-white/70 text-sm">{t('login.version')}</p>
 			</div>
 		</div>

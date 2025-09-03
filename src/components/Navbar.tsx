@@ -51,41 +51,32 @@ const Navbar = () => {
 					<div className="flex items-center space-x-2">
 						<Link
 							href="/"
-							className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out flex items-center ${isActive('/')
-								? 'bg-blue-50 text-blue-700'
-								: 'text-gray-700 hover:bg-gray-100'
-								}`}
+							className={`w-10 h-10 justify-center rounded-md text-sm font-medium transition-colors duration-150 ease-in-out flex items-center
+    ${isActive('/') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}
+    lg:w-auto lg:h-auto lg:px-4 lg:py-2 lg:justify-start`}
 						>
-							<Database className="h-4 w-4 mr-2" />
-							<div className='not-lg:hidden'>
-								{t('nav.dashboard')}
-							</div>
+							<Database className="h-5 w-5" />
+							<span className="hidden lg:inline ml-2">{t('nav.dashboard')}</span>
 						</Link>
 
 						<Link
 							href="/clients"
-							className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out flex items-center ${isActive('/clients')
-								? 'bg-blue-50 text-blue-700'
-								: 'text-gray-700 hover:bg-gray-100'
-								}`}
+							className={`w-10 h-10 justify-center rounded-md text-sm font-medium transition-colors duration-150 ease-in-out flex items-center
+    ${isActive('/clients') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}
+    lg:w-auto lg:h-auto lg:px-4 lg:py-2 lg:justify-start`}
 						>
-							<Users className="h-4 w-4 mr-2" />
-							<div className='not-lg:hidden'>
-								{t('nav.clients')}
-							</div>
+							<Users className="h-5 w-5" />
+							<span className="hidden lg:inline ml-2">{t('nav.clients')}</span>
 						</Link>
 
 						<Link
 							href="/money-calculation"
-							className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out flex items-center ${isActive('/money-calculation')
-								? 'bg-blue-50 text-blue-700'
-								: 'text-gray-700 hover:bg-gray-100'
-								}`}
+							className={`w-10 h-10 justify-center rounded-md text-sm font-medium transition-colors duration-150 ease-in-out flex items-center
+    ${isActive('/money-calculation') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}
+    lg:w-auto lg:h-auto lg:px-4 lg:py-2 lg:justify-start`}
 						>
-							<Calculator className="h-4 w-4 mr-2" />
-							<div className='not-lg:hidden'>
-								{t('nav.money')}
-							</div>
+							<Calculator className="h-5 w-5" />
+							<span className="hidden lg:inline ml-2">{t('nav.money')}</span>
 						</Link>
 
 						<div className="relative ml-4" ref={dropdownRef}>

@@ -11,7 +11,7 @@ export default function HomeContent() {
 		<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
 			<div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 shadow-2xl">
 				<div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]"></div>
-				<div className="relative px-8 py-16 sm:px-16 sm:py-24">
+				<div className="relative px-8 py-16 sm:px-16 sm:py-22">
 					<div className="max-w-3xl">
 						<h1 className="text-4xl font-bold text-white mb-4 sm:text-5xl">
 							{t('welcome.title')}
