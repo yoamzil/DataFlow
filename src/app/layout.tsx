@@ -39,7 +39,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 	const cookieStore = await cookies();
-	const lang = (cookieStore.get('language')?.value as 'en' | 'fr') || 'en';
+	const lang = (cookieStore.get('language')?.value as 'en' | 'fr') || 'fr';
 	return (
 		<html lang={lang} className={myFont.className}>
 			<body>

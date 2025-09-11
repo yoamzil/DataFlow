@@ -261,10 +261,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLang
 		if (typeof window !== 'undefined') {
 			// Client-side: read from cookie
 			const match = document.cookie.match(/(?:^|; )language=([^;]*)/);
-			return (match ? decodeURIComponent(match[1]) : 'en') as 'en' | 'fr';
+			return (match ? decodeURIComponent(match[1]) : 'fr') as 'en' | 'fr';
 		}
-		// Server-side: fallback to 'en' (could be improved for SSR)
-		return 'en';
+		// Server-side: fallback to 'fr' (default language)
+		return 'fr';
 	});
 
 	// When language changes, set cookie via server action
@@ -274,8 +274,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLang
 		if (typeof window !== 'undefined') {
 			const { setLanguageCookie } = await import('@/actions/language');
 			setLanguageCookie(lang);
-			// Also set client cookie for immediate effect
-			document.cookie = `language=${lang}; path=/`;
+			// Also set client cookie for immediate effect and persistence
+			const oneYearSeconds = 60 * 60 * 24 * 365;
+			document.cookie = `language=${lang}; path=/; max-age=${oneYearSeconds}; samesite=lax`;
 		}
 	};
 
@@ -293,7 +294,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode, initialLang
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			const match = document.cookie.match(/(?:^|; )language=([^;]*)/);
-			const cookieLang = (match ? decodeURIComponent(match[1]) : 'en') as 'en' | 'fr';
+			const cookieLang = (match ? decodeURIComponent(match[1]) : 'fr') as 'en' | 'fr';
 			if (cookieLang !== language) setLanguageState(cookieLang);
 		}
 	}, []);
