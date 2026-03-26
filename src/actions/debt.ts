@@ -1,8 +1,6 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // Get current debt (there's only one record)
 export async function getCurrentDebt(): Promise<number> {

@@ -130,7 +130,7 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 			: <ChevronDown className="h-4 w-4 text-blue-500" />;
 	};
 
-	const totalPages = 25;
+	const totalPages = Math.ceil(filteredClients.length / ITEMS_PER_PAGE);
 
 	const getPaginationNumbers = (): (number | string)[] => {
 		const delta = 2;

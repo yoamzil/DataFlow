@@ -1,11 +1,9 @@
 // src/actions/auth.ts
 "use server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import crypto from "crypto";
-
-const prisma = new PrismaClient();
 
 export async function login(password: string): Promise<boolean> {
 	const admin = await prisma.admin.findFirst();
