@@ -130,7 +130,35 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 			: <ChevronDown className="h-4 w-4 text-blue-500" />;
 	};
 
-	const totalPages = Math.ceil(filteredClients.length / ITEMS_PER_PAGE);
+	const totalPages = 25;
+
+	const getPaginationNumbers = (): (number | string)[] => {
+		const delta = 2;
+		const range = [];
+		const rangeWithDots = [];
+
+		for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+			range.push(i);
+		}
+
+		rangeWithDots.push(1);
+
+		if (range.length > 0 && range[0] > 2) {
+			rangeWithDots.push('...');
+		}
+
+		rangeWithDots.push(...range);
+
+		if (range.length > 0 && range[range.length - 1] < totalPages - 1) {
+			rangeWithDots.push('...');
+		}
+
+		if (totalPages > 1) {
+			rangeWithDots.push(totalPages);
+		}
+
+		return rangeWithDots;
+	};
 	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
 	const paginatedClients = filteredClients.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
@@ -339,18 +367,26 @@ export default function ClientsTable({ initialClients }: { initialClients: Clien
 								>
 									<ChevronLeft className="h-5 w-5" />
 								</button>
-								{Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-									<button
-										key={page}
-										onClick={() => setCurrentPage(page)}
-										className={`px-3 py-1 rounded-md ${currentPage === page
-											? 'bg-blue-600 text-white'
-											: 'text-gray-700 hover:bg-gray-100'
-											}`}
-									>
-										{page}
-									</button>
+
+								{getPaginationNumbers().map((page, index) => (
+									page === '...' ? (
+										<span key={`ellipsis-${index}`} className="px-2 text-gray-500">
+											...
+										</span>
+									) : (
+										<button
+											key={page}
+											onClick={() => setCurrentPage(page as number)}
+											className={`px-3 py-1 rounded-md ${currentPage === page
+												? 'bg-blue-600 text-white'
+												: 'text-gray-700 hover:bg-gray-100'
+												}`}
+										>
+											{page}
+										</button>
+									)
 								))}
+
 								<button
 									onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
 									disabled={currentPage === totalPages}
