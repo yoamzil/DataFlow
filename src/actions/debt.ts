@@ -21,7 +21,7 @@ export async function getCurrentDebt(): Promise<number> {
 
 // Update debt amount
 export async function updateDebt(
-	newAmount: number
+	newAmount: number,
 ): Promise<{ success: boolean; error?: string }> {
 	try {
 		// Find the first (and only) debt record

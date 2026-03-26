@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 export async function changePassword(
 	currentPassword: string,
-	newPassword: string
+	newPassword: string,
 ): Promise<{ success: boolean; error?: string }> {
 	try {
 		// Get the session token from cookies
@@ -28,7 +28,7 @@ export async function changePassword(
 		// Verify current password
 		const currentPasswordMatch = await bcrypt.compare(
 			currentPassword,
-			admin.hashedPassword
+			admin.hashedPassword,
 		);
 		if (!currentPasswordMatch) {
 			return { success: false, error: "Current password is incorrect" };
