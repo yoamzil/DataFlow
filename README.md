@@ -13,7 +13,7 @@ Built with Next.js 15, Prisma, and PostgreSQL — featuring authentication, form
 - ✅ Form validation with react-hook-form and Zod schemas
 - 🎞️ Smooth transitions with Framer Motion
 - 🔔 Toast notifications via react-hot-toast
-- 🗄️ PostgreSQL database with Prisma ORM
+- 🗄️ SQLite database with Prisma ORM
 
 ---
 
@@ -24,7 +24,7 @@ Built with Next.js 15, Prisma, and PostgreSQL — featuring authentication, form
 | Framework | Next.js 15 (App Router, Turbopack) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
-| Database | PostgreSQL + Prisma ORM |
+| Database | SQLite + Prisma ORM |
 | Auth | bcryptjs |
 | Forms | react-hook-form + Zod |
 | Animations | Framer Motion |
