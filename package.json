@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -14,9 +14,9 @@
     "bcryptjs": "^3.0.2",
     "framer-motion": "^12.23.6",
     "lucide-react": "^0.513.0",
-    "next": "^15.5.14",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^16",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-hook-form": "^7.58.1",
     "react-hot-toast": "^2.5.2",
     "zod": "^3.25.67"
@@ -29,9 +29,12 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "^16",
     "prisma": "^6.12.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   }
 }
