@@ -2,7 +2,7 @@
 
 A client management web app built for **Chaabi Cash** to streamline customer data handling and internal workflows.
 
-Built with Next.js 15, Prisma, and PostgreSQL — featuring authentication, form validation, and a clean dashboard UI.
+Built with Next.js 16, Prisma, and SQLite — featuring authentication, form validation, and a clean dashboard UI.
 
 ---
 
@@ -21,7 +21,7 @@ Built with Next.js 15, Prisma, and PostgreSQL — featuring authentication, form
 
 | Layer | Tools |
 |---|---|
-| Framework | Next.js 15 (App Router, Turbopack) |
+| Framework | Next.js 16 (App Router, Turbopack) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
 | Database | SQLite + Prisma ORM |
