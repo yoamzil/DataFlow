@@ -103,7 +103,7 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 		setIsLoading(true);
 		try {
 			if (client && client.id !== undefined) {
-				await updateClient(client.id, {
+				const result = await updateClient(client.id, {
 					name: data.name,
 					idCard: data.idCard,
 					phone: data.phone,
@@ -113,9 +113,15 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 					fileId: data.fileId,
 					company: data.company
 				});
+
+				if (!result.ok && result.code === 'ID_CARD_NAME_CONFLICT') {
+					toast.error(t('form.errors.exist'));
+					return;
+				}
+
 				toast.success(t('form.success.updated'));
 			} else {
-				await addClient({
+				const result = await addClient({
 					idCard: data.idCard,
 					name: data.name,
 					phone: data.phone,
@@ -125,23 +131,18 @@ export default function AddClientModal({ isOpen, onClose, client, companies }: A
 					fileId: data.fileId,
 					company: data.company
 				});
+
+				if (!result.ok && result.code === 'ID_CARD_NAME_CONFLICT') {
+					toast.error(t('form.errors.exist'));
+					return;
+				}
+
 				toast.success(t('form.success.added'));
 				reset();
 			}
 			onClose();
 		} catch (error) {
-			// Handle specific error types
-			if (error instanceof Error) {
-				if (error.message.includes('ID card already exists')) {
-					toast.error('Client with this ID card already exists with different name or phone.');
-				} else {
-					// Generic error for other cases
-					toast.error(t('form.errors.saveFailed'));
-				}
-			} else {
-				// Fallback for non-Error objects
-				toast.error(t('form.errors.saveFailed'));
-			}
+			toast.error(t('form.errors.saveFailed'));
 			console.error('Error adding client:', error);
 		} finally {
 			setIsLoading(false);
